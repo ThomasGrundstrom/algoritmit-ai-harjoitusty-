@@ -1,1 +1,1 @@
-# algoritmit-ai-harjoitustyo-
+# algoritmit-ai-harjoitustyo
