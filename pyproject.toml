@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "algoritmit-ai-harjoitustyo"
+version = "0.1.0"
+description = ""
+authors = ["Thomas Grundstrom <thomas.grundstrom@helsinki.fi>"]
+readme = "README.md"
+packages = [{include = "algoritmit_ai_harjoitustyo"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
