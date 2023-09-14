@@ -8,6 +8,7 @@ packages = [{include = "algoritmit_ai_harjoitustyo"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+invoke = "^2.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
