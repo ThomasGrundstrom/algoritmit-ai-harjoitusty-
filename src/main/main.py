@@ -26,11 +26,11 @@ class Suorita:
         for i in range(len(kartta.taulukko)):
             for j in range(len(kartta.taulukko)):
                 if kartta.taulukko[i][j] == 0:
-                    pygame.draw.rect(self.naytto, self.harmaa, (i * 20, j * 20, 18, 18))
+                    pygame.draw.rect(self.naytto, self.harmaa, (i * 20 + 1, j * 20 + 1, 18, 18))
         pygame.display.flip()
         self.kello.tick(1)
     
-    
+
     def silmukka(self):
 
         # Suoritetaan toistuvat tapahtumat silmukassa.
