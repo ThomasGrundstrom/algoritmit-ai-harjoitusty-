@@ -16,6 +16,9 @@ class Suorita:
         self.kello = pygame.time.Clock()
         self.musta = (0, 0, 0)
         self.harmaa = (50, 50, 50)
+        self.vihrea = (0, 255, 0)
+        self.punainen = (255, 0, 0)
+        self.sininen = (0, 100, 255)
 
 
     def piirra_naytto(self):
@@ -23,10 +26,14 @@ class Suorita:
         # Piirretään näyttö.
 
         self.naytto.fill(self.musta)
-        for i in range(len(kartta.taulukko)):
-            for j in range(len(kartta.taulukko)):
-                if kartta.taulukko[i][j] == 0:
+        for j in range(len(kartta.taulukko)):
+            for i in range(len(kartta.taulukko[0])):
+                if kartta.taulukko[j][i] == 0:
                     pygame.draw.rect(self.naytto, self.harmaa, (i * 20 + 1, j * 20 + 1, 18, 18))
+                elif kartta.taulukko[j][i] == 1:
+                    pygame.draw.rect(self.naytto, self.vihrea, (i * 20 + 1, j * 20 + 1, 18, 18))
+                elif kartta.taulukko[j][i] == 2:
+                    pygame.draw.rect(self.naytto, self.punainen, (i * 20 + 1, j * 20 + 1, 18, 18))
         pygame.display.flip()
         self.kello.tick(1)
     
