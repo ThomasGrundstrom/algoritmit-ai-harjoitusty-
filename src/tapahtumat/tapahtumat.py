@@ -18,6 +18,8 @@ class Tapahtumat:
         for tapahtuma in pygame.event.get():
             if tapahtuma.type == pygame.QUIT:
                 exit()
+            if tapahtuma.type == pygame.MOUSEBUTTONDOWN:
+                return "click"
 
 
 tapahtumat = Tapahtumat()
