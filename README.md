@@ -8,4 +8,5 @@
 ## Viikkoraportit
 
 - [Viikkoraportti 1](https://github.com/ThomasGrundstrom/algoritmit-ai-harjoitustyo/blob/main/dokumentaatio/viikkoraportti1.md)
+- [Viikkoraportti 2](https://github.com/ThomasGrundstrom/algoritmit-ai-harjoitustyo/blob/main/dokumentaatio/viikkoraportti2.md)
 
