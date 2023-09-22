@@ -1,4 +1,5 @@
 import pygame
+from main.tila import tila
 
 
 class Tapahtumat:
@@ -20,6 +21,9 @@ class Tapahtumat:
                 exit()
             if tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 return "click"
+            if tapahtuma.type == pygame.KEYDOWN:
+                if tapahtuma.key == pygame.K_d:
+                    tila.tila = 1
 
 
 tapahtumat = Tapahtumat()
