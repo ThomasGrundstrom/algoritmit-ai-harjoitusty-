@@ -2,6 +2,10 @@ class Solmu:
 
     # Luokka, joka määrittelee verkossa olevan solmun rakenteen.
 
-    def __init__(self, koordinaatit, etaisyys):
+    def __init__(self, koordinaatit, tyyppi):
         self.koordinaatit = koordinaatit
-        self.etaisyys = etaisyys
+        self.etaisyys = float("inf")
+        self.tyyppi = tyyppi
+        self.kasitelty = False
+        self.naapurit = []
+        self.edellinen = None
