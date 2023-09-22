@@ -1,6 +1,8 @@
 import pygame
 from tapahtumat.tapahtumat import tapahtumat
 from kartta.kartta import kartta
+from algoritmit.dijkstra import dijkstra
+from main.tila import tila
 
 
 class Suorita:
@@ -35,7 +37,7 @@ class Suorita:
                 elif kartta.taulukko[j][i] == 2:
                     pygame.draw.rect(self.naytto, self.punainen, (i * 20 + 1, j * 20 + 1, 18, 18))
         pygame.display.flip()
-        self.kello.tick(1)
+        self.kello.tick(60)
     
 
     def silmukka(self):
@@ -45,6 +47,9 @@ class Suorita:
         while True:
             self.piirra_naytto()
             tapahtumat.tutki_tapahtumat()
+            if tila.tila == 1:
+                dijkstra.reitinhaku()
+                tila.tila = 0
 
 
 suorita = Suorita()
