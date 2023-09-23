@@ -1,7 +1,7 @@
+import time
 from kartta.kartta import kartta
 from komponentit.solmut import Solmu
 from komponentit.kaaret import Kaari
-import time
 
 
 class Dijkstra:
@@ -152,6 +152,6 @@ class Dijkstra:
         print(len(self.polku))
         print(f"Aikaa kului: {loppu-alku} s.")
         for solmu in self.polku:
-            x = solmu.koordinaatit[0]
-            y = solmu.koordinaatit[1]
-            kartta.taulukko[y][x] = 4
+            pos_x = solmu.koordinaatit[0]
+            pos_y = solmu.koordinaatit[1]
+            kartta.taulukko[pos_y][pos_x] = 4
