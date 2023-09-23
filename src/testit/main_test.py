@@ -15,6 +15,7 @@ class TestSuorita(unittest.TestCase):
         self.assertEqual(self.suorita.vihrea, (0, 255, 0))
         self.assertEqual(self.suorita.punainen, (255, 0, 0))
         self.assertEqual(self.suorita.sininen, (0, 100, 255))
+        self.assertEqual(self.suorita.valkoinen, (255, 255, 255))
 
     def test_naytto_kaynnistys(self):
         self.suorita.piirra_naytto()
@@ -25,4 +26,4 @@ class TestSuorita(unittest.TestCase):
         self.assertEqual(self.suorita.naytto.get_at(
             (25, 25)), self.suorita.harmaa)
         self.assertEqual(self.suorita.naytto.get_at(
-            (795, 795)), self.suorita.punainen)
+            (85, 795)), self.suorita.punainen)
