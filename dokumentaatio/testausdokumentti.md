@@ -5,3 +5,4 @@ Ohjelman testaus on suoritettu unittestillä. Testit löytyvät [testikansiosta]
 
 ## Testikattavuus
 
+![](./kuvat/algoritmit-ai-testikattavuus.png)
