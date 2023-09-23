@@ -5,4 +5,10 @@ Ohjelman testaus on suoritettu unittestillä. Testit löytyvät [testikansiosta]
 
 ## Testikattavuus
 
+Testikattavuusraportti tallennetaan htmlcov-tiedostoon, kun projektin juurihakemistossa suoritetaan komento *poetry run invoke coverage-report*.
 ![](./kuvat/algoritmit-ai-testikattavuus.png)
+
+
+## Koodin laatu
+
+Koodin formalisointi on tehty autopep8:lla (juurihakemistossa komento *poetry run invoke format*) ja koodin laatua on ylläpidetty pylintin tarkistusten avulla (*poetry run invoke lint*)
