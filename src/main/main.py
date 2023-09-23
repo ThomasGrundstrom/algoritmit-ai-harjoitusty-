@@ -23,30 +23,27 @@ class Suorita:
         self.sininen = (0, 100, 255)
         self.ruskea = (255, 255, 255)
 
+
     def piirra_naytto(self):
 
-        # Piirretään näyttö.
+        # Piirretään visualisointi kartasta.
 
         self.naytto.fill(self.musta)
         for j in range(len(kartta.taulukko)):
             for i in range(len(kartta.taulukko[0])):
                 if kartta.taulukko[j][i] == 0:
-                    pygame.draw.rect(self.naytto, self.harmaa,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                    pygame.draw.rect(self.naytto, self.harmaa, (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 1:
-                    pygame.draw.rect(self.naytto, self.vihrea,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                    pygame.draw.rect(self.naytto, self.vihrea, (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 2:
-                    pygame.draw.rect(self.naytto, self.punainen,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                    pygame.draw.rect(self.naytto, self.punainen, (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 3:
-                    pygame.draw.rect(self.naytto, self.ruskea,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                    pygame.draw.rect(self.naytto, self.ruskea, (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 4:
-                    pygame.draw.rect(self.naytto, self.sininen,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                    pygame.draw.rect(self.naytto, self.sininen, (i * 20 + 1, j * 20 + 1, 18, 18))
         pygame.display.flip()
         self.kello.tick(60)
+    
 
     def silmukka(self):
 
