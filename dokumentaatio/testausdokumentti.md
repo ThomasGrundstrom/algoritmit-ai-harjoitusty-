@@ -6,6 +6,7 @@ Ohjelman testaus on suoritettu unittestillä. Testit löytyvät [testikansiosta]
 ## Testikattavuus
 
 Testikattavuusraportti tallennetaan htmlcov-tiedostoon, kun projektin juurihakemistossa suoritetaan komento *poetry run invoke coverage-report*.
+
 ![](./kuvat/algoritmit-ai-testikattavuus.png)
 
 
