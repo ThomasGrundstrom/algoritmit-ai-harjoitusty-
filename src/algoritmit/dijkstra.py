@@ -1,6 +1,7 @@
 from kartta.kartta import kartta
 from komponentit.solmut import Solmu
 from komponentit.kaaret import Kaari
+import time
 
 
 class Dijkstra:
@@ -29,6 +30,7 @@ class Dijkstra:
                 if self.solmut[j][i].tyyppi == 1:
                     self.alkusolmu = self.solmut[j][i]
                     self.alkusolmu.etaisyys = 0
+                    self.alkusolmu.keossa = True
                 if self.solmut[j][i].tyyppi == 2:
                     self.loppusolmu = self.solmut[j][i]
                 if j > 0 and j < len(self.solmut) - 1:
@@ -93,29 +95,41 @@ class Dijkstra:
 
     def reitinhaku(self):
 
+        # Metodi, jolla Dijkstran algoritmi toteutetaan.
+
+        # Luodaan ensin verkko algoritmia varten.
+        self.luo_verkko()
+
+        alku = time.time()
+
         # Varsinainen Dijkstran algoritmi.
 
-        self.luo_verkko()
         self.keko.append(self.alkusolmu)
         while len(self.keko) != 0:
             solmu = self.keko.pop(0)
             if solmu.koordinaatit == self.loppusolmu.koordinaatit:
+                loppu = time.time()
                 break
             if solmu.kasitelty:
                 continue
             solmu.kasitelty = True
             for kaari in solmu.naapurit:
-                nyky = kaari.loppu.etaisyys
-                uusi = solmu.etaisyys + kaari.pituus
-                if uusi < nyky:
-                    kaari.loppu.etaisyys = uusi
-                self.keko.append(kaari.loppu)
-                kaari.loppu.edellinen = solmu
+                if not kaari.loppu.kasitelty:
+                    nyky = kaari.loppu.etaisyys
+                    uusi = solmu.etaisyys + kaari.pituus
+                    if uusi < nyky:
+                        kaari.loppu.etaisyys = uusi
+                    if not kaari.loppu.keossa:
+                        kaari.loppu.keossa = True
+                        self.keko.append(kaari.loppu)
+                        kaari.loppu.edellinen = solmu
         while solmu.edellinen.koordinaatit != self.alkusolmu.koordinaatit:
-            self.polku.append(solmu)
+            self.polku.append(solmu.edellinen)
             solmu = solmu.edellinen
         print(self.solmut[39][39].etaisyys)
-        print(self.polku)
-
-
-dijkstra = Dijkstra()
+        print(len(self.polku))
+        print(f"Aikaa kului: {loppu-alku} s.")
+        for solmu in self.polku:
+            x = solmu.koordinaatit[0]
+            y = solmu.koordinaatit[1]
+            kartta.taulukko[y][x] = 4

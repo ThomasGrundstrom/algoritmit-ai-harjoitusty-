@@ -9,3 +9,4 @@ class Solmu:
         self.kasitelty = False
         self.naapurit = []
         self.edellinen = None
+        self.keossa = False

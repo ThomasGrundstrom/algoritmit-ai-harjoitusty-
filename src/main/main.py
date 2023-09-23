@@ -1,7 +1,7 @@
 import pygame
 from tapahtumat.tapahtumat import tapahtumat
 from kartta.kartta import kartta
-from algoritmit.dijkstra import dijkstra
+from algoritmit.dijkstra import Dijkstra
 from main.tila import tila
 
 
@@ -21,6 +21,7 @@ class Suorita:
         self.vihrea = (0, 255, 0)
         self.punainen = (255, 0, 0)
         self.sininen = (0, 100, 255)
+        self.ruskea = (255, 255, 255)
 
 
     def piirra_naytto(self):
@@ -36,6 +37,10 @@ class Suorita:
                     pygame.draw.rect(self.naytto, self.vihrea, (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 2:
                     pygame.draw.rect(self.naytto, self.punainen, (i * 20 + 1, j * 20 + 1, 18, 18))
+                elif kartta.taulukko[j][i] == 3:
+                    pygame.draw.rect(self.naytto, self.ruskea, (i * 20 + 1, j * 20 + 1, 18, 18))
+                elif kartta.taulukko[j][i] == 4:
+                    pygame.draw.rect(self.naytto, self.sininen, (i * 20 + 1, j * 20 + 1, 18, 18))
         pygame.display.flip()
         self.kello.tick(60)
     
@@ -48,7 +53,7 @@ class Suorita:
             self.piirra_naytto()
             tapahtumat.tutki_tapahtumat()
             if tila.tila == 1:
-                dijkstra.reitinhaku()
+                Dijkstra().reitinhaku()
                 tila.tila = 0
 
 
