@@ -14,7 +14,6 @@ class Dijkstra:
         self.alkusolmu = None
         self.loppusolmu = None
         self.polku = []
-    
 
     def luo_verkko(self):
 
@@ -36,62 +35,85 @@ class Dijkstra:
                 if j > 0 and j < len(self.solmut) - 1:
                     if i > 0 and i < len(self.solmut[j]) - 1:
                         if kartta.taulukko[j-1][i] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i], 5))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j-1][i], 5))
                         if kartta.taulukko[j+1][i] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i], 5))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j+1][i], 5))
                         if kartta.taulukko[j][i-1] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j][i-1], 5))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j][i-1], 5))
                         if kartta.taulukko[j][i+1] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j][i+1], 5))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j][i+1], 5))
                         if kartta.taulukko[j+1][i+1] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i+1], 7))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j+1][i+1], 7))
                         if kartta.taulukko[j+1][i-1] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i-1], 7))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j+1][i-1], 7))
                         if kartta.taulukko[j-1][i+1] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i+1], 7))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j-1][i+1], 7))
                         if kartta.taulukko[j-1][i-1] != 3:
-                            self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i-1], 7))
+                            self.solmut[j][i].naapurit.append(
+                                Kaari(self.solmut[j-1][i-1], 7))
                 if j == 0 and i > 0 and i < len(self.solmut[j]) - 1:
                     if kartta.taulukko[j+1][i] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i], 5))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i], 5))
                     if kartta.taulukko[j+1][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i+1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i+1], 7))
                     if kartta.taulukko[j+1][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i-1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i-1], 7))
                 if j == len(self.solmut) - 1 and i > 0 and i < len(self.solmut[j]) - 1:
                     if kartta.taulukko[j-1][i] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i], 5))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i], 5))
                     if kartta.taulukko[j-1][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i+1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i+1], 7))
                     if kartta.taulukko[j-1][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i-1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i-1], 7))
                 if i == 0 and j > 0 and j < len(self.solmut) - 1:
                     if kartta.taulukko[j][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j][i+1], 5))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j][i+1], 5))
                     if kartta.taulukko[j+1][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i+1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i+1], 7))
                     if kartta.taulukko[j-1][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i+1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i+1], 7))
                 if i == len(self.solmut[j]) - 1 and j > 0 and j < len(self.solmut) - 1:
                     if kartta.taulukko[j][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j][i-1], 5))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j][i-1], 5))
                     if kartta.taulukko[j-1][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i-1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i-1], 7))
                     if kartta.taulukko[j+1][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i-1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i-1], 7))
                 if j == 0 and i == 0:
                     if kartta.taulukko[j+1][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i+1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i+1], 7))
                 if j == 0 and i == len(self.solmut[j]) - 1:
                     if kartta.taulukko[j+1][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j+1][i-1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j+1][i-1], 7))
                 if j == len(self.solmut) - 1 and i == 0:
                     if kartta.taulukko[j-1][i+1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i+1], 7))
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i+1], 7))
                 if j == len(self.solmut) - 1 and i == len(self.solmut[j]) - 1:
                     if kartta.taulukko[j-1][i-1] != 3:
-                        self.solmut[j][i].naapurit.append(Kaari(self.solmut[j-1][i-1], 7))
-    
+                        self.solmut[j][i].naapurit.append(
+                            Kaari(self.solmut[j-1][i-1], 7))
 
     def reitinhaku(self):
 

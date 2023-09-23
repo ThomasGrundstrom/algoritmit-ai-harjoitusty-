@@ -11,7 +11,7 @@ class Tapahtumat:
         # Määritellään pygame.
 
         pygame.init()
-    
+
     def tutki_tapahtumat(self):
 
         # Tutkitaan tapahtumat.
