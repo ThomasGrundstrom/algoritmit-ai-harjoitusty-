@@ -5,7 +5,6 @@ from komponentit.solmut import Solmu
 class testSolmu(unittest.TestCase):
     def setUp(self):
         self.solmu = Solmu((0, 0), 1)
-    
 
     def test_alkuarvot(self):
         self.assertEqual(self.solmu.koordinaatit, (0, 0))
@@ -15,4 +14,3 @@ class testSolmu(unittest.TestCase):
         self.assertEqual(self.solmu.naapurit, [])
         self.assertEqual(self.solmu.edellinen, None)
         self.assertEqual(self.solmu.keossa, False)
-
