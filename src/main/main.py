@@ -21,7 +21,7 @@ class Suorita:
         self.vihrea = (0, 255, 0)
         self.punainen = (255, 0, 0)
         self.sininen = (0, 100, 255)
-        self.musta = (0, 0, 0)
+        
 
     def piirra_naytto(self):
 
