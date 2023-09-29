@@ -26,24 +26,29 @@ class Suorita:
 
         # Piirretään visualisointi kartasta.
 
+        ruutu_x_pos = (800//len(kartta.taulukko[0]))
+        ruutu_y_pos = (800//len(kartta.taulukko))
+        ruutu_leveys = (800//len(kartta.taulukko[0])) - 2
+        ruutu_korkeus = (800//len(kartta.taulukko)) - 2
+
         self.naytto.fill(self.musta)
         for j in range(len(kartta.taulukko)):
             for i in range(len(kartta.taulukko[0])):
                 if kartta.taulukko[j][i] == 0:
                     pygame.draw.rect(self.naytto, self.harmaa,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                                     (i * ruutu_x_pos + 1, j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
                 elif kartta.taulukko[j][i] == 1:
                     pygame.draw.rect(self.naytto, self.vihrea,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                                     (i * ruutu_x_pos + 1, j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
                 elif kartta.taulukko[j][i] == 2:
                     pygame.draw.rect(self.naytto, self.punainen,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                                     (i * ruutu_x_pos + 1, j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
                 elif kartta.taulukko[j][i] == 3:
                     pygame.draw.rect(self.naytto, self.musta,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                                     (i * ruutu_x_pos + 1, j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
                 elif kartta.taulukko[j][i] == 4:
                     pygame.draw.rect(self.naytto, self.sininen,
-                                     (i * 20 + 1, j * 20 + 1, 18, 18))
+                                     (i * ruutu_x_pos + 1, j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
         pygame.display.flip()
         self.kello.tick(60)
 
