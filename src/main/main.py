@@ -21,7 +21,7 @@ class Suorita:
         self.vihrea = (0, 255, 0)
         self.punainen = (255, 0, 0)
         self.sininen = (0, 100, 255)
-        self.valkoinen = (255, 255, 255)
+        self.musta = (0, 0, 0)
 
     def piirra_naytto(self):
 
@@ -40,7 +40,7 @@ class Suorita:
                     pygame.draw.rect(self.naytto, self.punainen,
                                      (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 3:
-                    pygame.draw.rect(self.naytto, self.valkoinen,
+                    pygame.draw.rect(self.naytto, self.musta,
                                      (i * 20 + 1, j * 20 + 1, 18, 18))
                 elif kartta.taulukko[j][i] == 4:
                     pygame.draw.rect(self.naytto, self.sininen,
