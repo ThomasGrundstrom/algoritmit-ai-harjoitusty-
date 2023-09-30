@@ -3,4 +3,3 @@ class Jpssolmu:
         self.koordinaatit = koordinaatit
         self.tyyppi = tyyppi
         self.naapurit = []
-        

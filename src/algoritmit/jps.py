@@ -10,7 +10,7 @@ class Jps:
         self.solmut = []
         self.alkusolmu = None
         self.loppusolmu = None
-    
+
     def luo_solmut(self):
 
         # Luodaan solmuista koostuva verkko, jota algoritmi voi käyttää.
@@ -32,50 +32,65 @@ class Jps:
                         self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i-1])
                     if i == 0:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i+1])
                     if i == len(self.solmut[0])-1:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i-1])
                 if j == 0:
                     if i == 0:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
                         self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i+1])
                     if i == len(self.solmut[0])-1:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
                         self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i-1])
                     if i > 0 and i < len(self.solmut[0])-1:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
                         self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j+1][i+1])
                 if j == len(self.solmut)-1:
                     if i == 0:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
                         self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i+1])
                     if i == len(self.solmut[0])-1:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
                         self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i-1])
                     if i > 0 and i < len(self.solmut[0])-1:
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
                         self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i-1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i+1])
+                        self.solmut[j][i].naapurit.append(
+                            self.solmut[j-1][i-1])
 
     def reitinhaku(self):
 
         # JPS-algoritmi
-
