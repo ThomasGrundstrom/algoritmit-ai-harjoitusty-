@@ -148,7 +148,7 @@ class Dijkstra:
         while solmu.edellinen.koordinaatit != self.alkusolmu.koordinaatit:
             self.polku.append(solmu.edellinen)
             solmu = solmu.edellinen
-        print(self.solmut[39][39].etaisyys)
+        print(self.loppusolmu.etaisyys)
         print(len(self.polku))
         print(f"Aikaa kului: {loppu-alku} s.")
         for solmu in self.polku:
