@@ -2,6 +2,7 @@ import pygame
 from tapahtumat.tapahtumat import tapahtumat
 from kartta.kartta import kartta
 from algoritmit.dijkstra import Dijkstra
+from algoritmit.jps import Jps
 from main.tila import tila
 
 
@@ -61,6 +62,9 @@ class Suorita:
             tapahtumat.tutki_tapahtumat()
             if tila.tila == 1:
                 Dijkstra().reitinhaku()
+                tila.tila = 0
+            if tila.tila == 2:
+                Jps().reitinhaku()
                 tila.tila = 0
 
 
