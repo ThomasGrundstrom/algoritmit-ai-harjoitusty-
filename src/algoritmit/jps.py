@@ -41,12 +41,16 @@ class Jps:
                         self.solmut[j][i].naapurit.append(
                             self.solmut[j-1][i-1])
                     if i == 0:
+                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
+                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
                         self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
                         self.solmut[j][i].naapurit.append(
                             self.solmut[j-1][i+1])
                         self.solmut[j][i].naapurit.append(
                             self.solmut[j+1][i+1])
                     if i == len(self.solmut[0])-1:
+                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
+                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
                         self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
                         self.solmut[j][i].naapurit.append(
                             self.solmut[j-1][i-1])
@@ -90,6 +94,34 @@ class Jps:
                             self.solmut[j-1][i+1])
                         self.solmut[j][i].naapurit.append(
                             self.solmut[j-1][i-1])
+                        
+    def karsi_naapurit(self, solmu):
+        pos_x = solmu.koordinaatit[0]
+        pos_y = solmu.koordinaatit[1]
+        if solmu.edellinen.koordinaatit[0] < pos_x and solmu.edellinen.koordinaatit[1] == pos_y:
+            if pos_x != len(kartta.taulukko[0])-1:
+                if kartta.taulukko[pos_y][pos_x+1] != 3:
+                    solmu.pakolliset.append(self.solmut[pos_y][pos_x+1])
+                if pos_y > 0:
+                    if kartta.taulukko[pos_y-1][pos_x] == 3 and kartta.taulukko[pos_y-1][pos_x+1] != 3:
+                        solmu.pakolliset.append(self.solmut[pos_y-1][pos_x+1])
+                if pos_y < len(kartta.taulukko)-1:
+                    if kartta.taulukko[pos_y+1][pos_x] == 3 and kartta.taulukko[pos_y+1][pos_x+1] != 3:
+                        solmu.pakolliset.append(self.solmut[pos_y+1][pos_x+1])
+        if solmu.edellinen.koordinaatit[0] == pos_x and solmu.edellinen.koordinaatit[1] < pos_y:
+            if pos_y != len(kartta.taulukko)-1:
+                if kartta.taulukko[pos_y+1][pos_x] != 3:
+                    solmu.pakolliset.append(self.solmut[pos_y+1][pos_x])
+                if pos_x > 0:
+                    if kartta.taulukko[pos_y][pos_x-1] == 3 and kartta.taulukko[pos_y+1][pos_x-1] != 3:
+                        solmu.pakolliset.append(self.solmut[pos_y+1][pos_x-1])
+                if pos_x < len(kartta.taulukko[0])-1:
+                    if kartta.taulukko[pos_y][pos_x+1] == 3 and kartta.taulukko[pos_y+1][pos_x+1] != 3:
+                        solmu.pakolliset.append(self.solmut[pos_y+1][pos_x+1])
+
+    
+    def tunnista_seuraavat(self, solmu):
+
 
     def reitinhaku(self):
 
