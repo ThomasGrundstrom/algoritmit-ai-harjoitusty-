@@ -1,7 +1,27 @@
 import time
+import heapq
 from kartta.kartta import kartta
 from komponentit.solmut import Solmu
 from komponentit.kaaret import Kaari
+
+
+class Prioriteettijono:
+
+    # Luokka, jolla huolehditaan siitä, että algoritmi priorisoi lyhyemmän etäisyyden päässä olevien naapureiden tutkimista.
+
+    def __init__(self):
+        self.pino = {}
+
+    def lisaa_jonoon(self, objekti, prioriteetti):
+        self.pino[objekti] = prioriteetti
+
+    def poista_lahin(self):
+        lahin = min(self.pino, key=lambda solmu: self.pino[solmu])
+        del self.pino[lahin]
+        return lahin
+
+    def pituus(self):
+        return len(self.pino)
 
 
 class Dijkstra:
@@ -10,7 +30,7 @@ class Dijkstra:
 
     def __init__(self):
         self.solmut = []
-        self.keko = []
+        self.keko = Prioriteettijono()
         self.alkusolmu = None
         self.loppusolmu = None
         self.polku = []
@@ -174,9 +194,9 @@ class Dijkstra:
 
         # Varsinainen Dijkstran algoritmi.
 
-        self.keko.append(self.alkusolmu)
-        while len(self.keko) != 0:
-            solmu = self.keko.pop(0)
+        self.keko.lisaa_jonoon(self.alkusolmu, self.alkusolmu.etaisyys)
+        while self.keko.pituus() != 0:
+            solmu = self.keko.poista_lahin()
             if solmu.koordinaatit == self.loppusolmu.koordinaatit:
                 loppu = time.time()
                 break
@@ -191,7 +211,8 @@ class Dijkstra:
                         kaari.loppu.etaisyys = uusi
                     if not kaari.loppu.keossa:
                         kaari.loppu.keossa = True
-                        self.keko.append(kaari.loppu)
+                        self.keko.lisaa_jonoon(
+                            kaari.loppu, kaari.loppu.etaisyys)
                         kaari.loppu.edellinen = solmu
         while solmu.edellinen.koordinaatit != self.alkusolmu.koordinaatit:
             self.polku.append(solmu.edellinen)
