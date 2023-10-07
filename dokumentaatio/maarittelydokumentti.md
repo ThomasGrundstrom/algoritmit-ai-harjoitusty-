@@ -1,6 +1,6 @@
 # Määrittelydokumentti
 
-- Alustavana ideana on toteuttaa Pythonilla kaksi reitinhakualgoritmia, esimerkiksi JPS ja Dijkstran algoritmi (nämä saattavat vielä muuttua). 
+- Alustavana ideana on toteuttaa Pythonilla kaksi reitinhakualgoritmia: JPS ja Dijkstran algoritmi. 
 - Tarkoituksena on löytää lyhin reitti kahden pisteen välillä taulukkomaisesti toteutetulla kartalla. 
 - Ohjelma saa syötteenä tiedon lähtö- ja maalipisteistä. 
 - Tavoitteena on toteuttaa algoritmit siten, että ne löytävät aina optimaalisen reitin mahdollisimman tehokkailla tila- ja aikavaatimuksilla. 
