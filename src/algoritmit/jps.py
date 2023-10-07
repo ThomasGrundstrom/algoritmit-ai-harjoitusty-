@@ -1,15 +1,17 @@
+import time
 from kartta.kartta import kartta
 from komponentit.jpssolmut import Jpssolmu
 
 
 class Jps:
 
-    # Luokka JPS-algoritmin toteutusta varten.
+    # Luokka JPS-algoritmin toteutusta varten. Vaatii korjausta.
 
     def __init__(self):
         self.solmut = []
         self.alkusolmu = None
         self.loppusolmu = None
+        self.polku = []
 
     def luo_solmut(self):
 
@@ -24,76 +26,100 @@ class Jps:
             for i in range(len(self.solmut[0])):
                 if self.solmut[j][i].tyyppi == 1:
                     self.alkusolmu = self.solmut[j][i]
+                    if j > 0 and j < len(self.solmut)-1:
+                        if i > 0 and i < len(self.solmut[0])-1:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i-1])
+                        if i == 0:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i+1])
+                        if i == len(self.solmut[0])-1:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i-1])
+                    if j == 0:
+                        if i == 0:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i+1])
+                        if i == len(self.solmut[0])-1:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i-1])
+                        if i > 0 and i < len(self.solmut[0])-1:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j+1][i+1])
+                    if j == len(self.solmut)-1:
+                        if i == 0:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i+1])
+                        if i == len(self.solmut[0])-1:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i-1])
+                        if i > 0 and i < len(self.solmut[0])-1:
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j][i-1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i+1])
+                            self.solmut[j][i].naapurit.append(
+                                self.solmut[j-1][i-1])
                 if self.solmut[j][i].tyyppi == 2:
                     self.loppusolmu = self.solmut[j][i]
-                if j > 0 and j < len(self.solmut)-1:
-                    if i > 0 and i < len(self.solmut[0])-1:
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i+1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i-1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i+1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i-1])
-                    if i == 0:
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i+1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i+1])
-                    if i == len(self.solmut[0])-1:
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i-1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i-1])
-                if j == 0:
-                    if i == 0:
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i+1])
-                    if i == len(self.solmut[0])-1:
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i-1])
-                    if i > 0 and i < len(self.solmut[0])-1:
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j+1][i])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i-1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j+1][i+1])
-                if j == len(self.solmut)-1:
-                    if i == 0:
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i+1])
-                    if i == len(self.solmut[0])-1:
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i-1])
-                    if i > 0 and i < len(self.solmut[0])-1:
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i+1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j][i-1])
-                        self.solmut[j][i].naapurit.append(self.solmut[j-1][i])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i+1])
-                        self.solmut[j][i].naapurit.append(
-                            self.solmut[j-1][i-1])
 
     def karsi_naapurit(self, solmu):
 
@@ -252,13 +278,11 @@ class Jps:
         if suunta == 7 and pos_x != len(kartta.taulukko[0])-1 and pos_y != len(kartta.taulukko)-1:
             seuraava = self.solmut[pos_y+1][pos_x+1]
         if seuraava == None:
-            return
+            return None
         if seuraava.tyyppi == 3:
-            return
+            return None
         seuraava.edellinen = solmu
-        seurx = seuraava.koordinaatit[0]
-        seury = seuraava.koordinaatit[1]
-        kartta.taulukko[seury][seurx] = 4
+        self.karsi_naapurit(seuraava)
         if seuraava.koordinaatit == self.loppusolmu.koordinaatit:
             return seuraava
         if len(seuraava.pakolliset) > 0:
@@ -289,19 +313,45 @@ class Jps:
 
         # JPS:n tarvitsema funktio seuraavien hyppypisteiden tunnistamista varten. Vastaa JPS-dokumentaation algoritmia 1.
 
-        for naapuri in solmu.luonnolliset:
+        if solmu.koordinaatit != self.alkusolmu.koordinaatit:
+            for i in solmu.pakolliset:
+                solmu.naapurit.append(i)
+            for i in solmu.luonnolliset:
+                solmu.naapurit.append(i)
+
+        for naapuri in solmu.naapurit:
             seuraava = self.hyppy(solmu, self.suunta(solmu, naapuri))
-            solmu.seuraajat.append(seuraava)
-        for naapuri in solmu.luonnolliset:
-            seuraava = self.hyppy(solmu, self.suunta(solmu, naapuri))
-            solmu.seuraajat.append(seuraava)
+            if seuraava != None:
+                solmu.seuraajat.append(seuraava)
         return solmu.seuraajat
 
     def reitinhaku(self):
 
-        # JPS-algoritmi, keskeneräinen.
+        # JPS-algoritmi.
 
         self.luo_solmut()
 
-        self.alkusolmu.luonnolliset = self.alkusolmu.naapurit
-        print(self.tunnista_seuraavat(self.alkusolmu))
+        alku = time.time()
+
+        stack = self.tunnista_seuraavat(self.alkusolmu)
+        while True:
+            if len(stack) == 0:
+                break
+            solmu = stack.pop(0)
+            pos_x = solmu.koordinaatit[0]
+            pos_y = solmu.koordinaatit[1]
+            # kartta.taulukko[pos_y][pos_x] = 4
+            for i in self.tunnista_seuraavat(solmu):
+                stack.append(i)
+
+        loppu = time.time()
+
+        solmu = self.loppusolmu
+        while True:
+            solmu = solmu.edellinen
+            if solmu.koordinaatit == self.alkusolmu.koordinaatit:
+                break
+            pos_x = solmu.koordinaatit[0]
+            pos_y = solmu.koordinaatit[1]
+            kartta.taulukko[pos_y][pos_x] = 4
+        print(f"Aikaa kului: {loppu-alku} s")
