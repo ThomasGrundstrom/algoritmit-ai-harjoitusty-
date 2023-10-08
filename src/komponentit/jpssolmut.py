@@ -10,3 +10,5 @@ class Jpssolmu:
         self.pakolliset = []
         self.seuraajat = []
         self.edellinen = None
+        self.tutkittu = False
+        self.jumppoint = False
