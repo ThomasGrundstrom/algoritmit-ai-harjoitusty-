@@ -22,6 +22,7 @@ class Suorita:
         self.vihrea = (0, 255, 0)
         self.punainen = (255, 0, 0)
         self.sininen = (0, 100, 255)
+        self.valkoinen = (255, 255, 255)
 
     def piirra_naytto(self):
 
@@ -50,6 +51,9 @@ class Suorita:
                 elif kartta.taulukko[j][i] == 4:
                     pygame.draw.rect(self.naytto, self.sininen,
                                      (i * ruutu_x_pos + 1, j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
+                elif kartta.taulukko[j][i] == 5:
+                    pygame.draw.rect(self.naytto, self.valkoinen, (i * ruutu_x_pos + 1,
+                                     j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
         pygame.display.flip()
         self.kello.tick(60)
 
