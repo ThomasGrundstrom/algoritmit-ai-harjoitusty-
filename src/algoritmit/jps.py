@@ -12,6 +12,7 @@ class Jps:
         self.alkusolmu = None
         self.loppusolmu = None
         self.polku = []
+        self.hyppypisteet = []
 
     def luo_solmut(self):
 
@@ -281,6 +282,9 @@ class Jps:
             return None
         if seuraava.tyyppi == 3:
             return None
+        if seuraava.jumppoint:
+            return None
+        seuraava.tutkittu = True
         seuraava.edellinen = solmu
         self.karsi_naapurit(seuraava)
         if seuraava.koordinaatit == self.loppusolmu.koordinaatit:
@@ -323,6 +327,8 @@ class Jps:
             seuraava = self.hyppy(solmu, self.suunta(solmu, naapuri))
             if seuraava != None:
                 solmu.seuraajat.append(seuraava)
+                seuraava.jumppoint = True
+                self.hyppypisteet.append(seuraava)
         return solmu.seuraajat
 
     def reitinhaku(self):
@@ -338,9 +344,6 @@ class Jps:
             if len(stack) == 0:
                 break
             solmu = stack.pop(0)
-            pos_x = solmu.koordinaatit[0]
-            pos_y = solmu.koordinaatit[1]
-            # kartta.taulukko[pos_y][pos_x] = 4
             for i in self.tunnista_seuraavat(solmu):
                 stack.append(i)
 
@@ -354,4 +357,8 @@ class Jps:
             pos_x = solmu.koordinaatit[0]
             pos_y = solmu.koordinaatit[1]
             kartta.taulukko[pos_y][pos_x] = 4
+#        for solmu in self.hyppypisteet:
+#            pos_x = solmu.koordinaatit[0]
+#            pos_y = solmu.koordinaatit[1]
+#            kartta.taulukko[pos_y][pos_x] = 5
         print(f"Aikaa kului: {loppu-alku} s")
