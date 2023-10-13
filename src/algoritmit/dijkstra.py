@@ -187,10 +187,10 @@ class Dijkstra:
 
         # Metodi, jolla Dijkstran algoritmi toteutetaan.
 
+        alku = time.time()
+
         # Luodaan ensin verkko algoritmia varten.
         self.luo_verkko()
-
-        alku = time.time()
 
         # Varsinainen Dijkstran algoritmi.
 
@@ -217,9 +217,14 @@ class Dijkstra:
         while solmu.edellinen.koordinaatit != self.alkusolmu.koordinaatit:
             self.polku.append(solmu.edellinen)
             solmu = solmu.edellinen
-        print(self.loppusolmu.etaisyys)
-        print(len(self.polku))
+        print()
+        print("Dijkstra: ")
+        print(f"Polun pituus: {self.loppusolmu.etaisyys}")
+#        print(f"Ruutujen välisiä siirtymiä polulla: {len(self.polku)+1}")
         print(f"Aikaa kului: {loppu-alku} s.")
+        print()
+
+        # Piirretään löydetty polku kartalle.
         for solmu in self.polku:
             pos_x = solmu.koordinaatit[0]
             pos_y = solmu.koordinaatit[1]
