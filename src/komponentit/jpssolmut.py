@@ -11,4 +11,5 @@ class Jpssolmu:
         self.seuraajat = []
         self.edellinen = None
         self.tutkittu = False
-        self.jumppoint = False
+        self.hyppypiste = False
+        self.etaisyys = None
