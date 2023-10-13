@@ -26,7 +26,6 @@ class Kartta:
 #        for j in range(25):
 #            for i in range(1, 179):
 #                self.taulukko[j*4+2][i] = 3
-#        self.taulukko[98][0] = 3
 
 #        for j in range(25):
 #            if j != 0:
