@@ -5,7 +5,7 @@ from komponentit.jpssolmut import Jpssolmu
 
 class Jps:
 
-    # Luokka JPS-algoritmin toteutusta varten. Vaatii korjausta.
+    # Luokka JPS-algoritmin toteutusta varten.
 
     def __init__(self):
         self.solmut = []
@@ -16,7 +16,9 @@ class Jps:
 
     def luo_solmut(self):
 
-        # Luodaan solmuista koostuva verkko, jota algoritmi voi käyttää.
+        # Luodaan kaksiulotteinen lista solmuista, jossa jokainen solmu vastaa pistettä kartalla.
+        # Määritellään samalla lähtö- ja maalipisteiden koordinaatit.
+        # Asetetaan lähtöpisteen etäisyydeksi 0 ja määritellään lähtöpisteen naapurisolmut.
 
         for j in range(len(kartta.taulukko)):
             rivi = []
@@ -27,6 +29,7 @@ class Jps:
             for i in range(len(self.solmut[0])):
                 if self.solmut[j][i].tyyppi == 1:
                     self.alkusolmu = self.solmut[j][i]
+                    self.alkusolmu.etaisyys = 0
                     if j > 0 and j < len(self.solmut)-1:
                         if i > 0 and i < len(self.solmut[0])-1:
                             self.solmut[j][i].naapurit.append(
@@ -132,7 +135,10 @@ class Jps:
         if solmu.edellinen.koordinaatit[0] < pos_x and solmu.edellinen.koordinaatit[1] == pos_y:
             if pos_x != len(kartta.taulukko[0])-1:
                 if kartta.taulukko[pos_y][pos_x+1] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y][pos_x+1])
+                    if kartta.taulukko[pos_y][pos_x+1] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y][pos_x+1])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y][pos_x+1])
                 if pos_y > 0:
                     if kartta.taulukko[pos_y-1][pos_x] == 3 and kartta.taulukko[pos_y-1][pos_x+1] != 3:
                         solmu.pakolliset.append(self.solmut[pos_y-1][pos_x+1])
@@ -142,7 +148,10 @@ class Jps:
         if solmu.edellinen.koordinaatit[0] == pos_x and solmu.edellinen.koordinaatit[1] < pos_y:
             if pos_y != len(kartta.taulukko)-1:
                 if kartta.taulukko[pos_y+1][pos_x] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y+1][pos_x])
+                    if kartta.taulukko[pos_y+1][pos_x] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y+1][pos_x])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y+1][pos_x])
                 if pos_x > 0:
                     if kartta.taulukko[pos_y][pos_x-1] == 3 and kartta.taulukko[pos_y+1][pos_x-1] != 3:
                         solmu.pakolliset.append(self.solmut[pos_y+1][pos_x-1])
@@ -152,7 +161,10 @@ class Jps:
         if solmu.edellinen.koordinaatit[0] > pos_x and solmu.edellinen.koordinaatit[1] == pos_y:
             if pos_x != 0:
                 if kartta.taulukko[pos_y][pos_x-1] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y][pos_x-1])
+                    if kartta.taulukko[pos_y][pos_x-1] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y][pos_x-1])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y][pos_x-1])
                 if pos_y > 0:
                     if kartta.taulukko[pos_y-1][pos_x] == 3 and kartta.taulukko[pos_y-1][pos_x-1] != 3:
                         solmu.pakolliset.append(self.solmut[pos_y-1][pos_x-1])
@@ -162,7 +174,10 @@ class Jps:
         if solmu.edellinen.koordinaatit[0] == pos_x and solmu.edellinen.koordinaatit[1] > pos_y:
             if pos_y != 0:
                 if kartta.taulukko[pos_y-1][pos_x] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y-1][pos_x])
+                    if kartta.taulukko[pos_y-1][pos_x] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y-1][pos_x])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y-1][pos_x])
                 if pos_x > 0:
                     if kartta.taulukko[pos_y][pos_x-1] == 3 and kartta.taulukko[pos_y-1][pos_x-1] != 3:
                         solmu.pakolliset.append(self.solmut[pos_y-1][pos_x-1])
@@ -172,61 +187,97 @@ class Jps:
         if solmu.edellinen.koordinaatit[0] < pos_x and solmu.edellinen.koordinaatit[1] < pos_y:
             if pos_x != len(kartta.taulukko[0])-1:
                 if kartta.taulukko[pos_y][pos_x+1] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y][pos_x+1])
+                    if kartta.taulukko[pos_y][pos_x+1] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y][pos_x+1])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y][pos_x+1])
                 if kartta.taulukko[pos_y-1][pos_x] == 3 and kartta.taulukko[pos_y-1][pos_x+1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y-1][pos_x+1])
                 if pos_y != len(kartta.taulukko)-1:
-                    if kartta.taulukko[pos_y+1][pos_x]+1 != 3:
-                        solmu.luonnolliset.append(
-                            self.solmut[pos_y+1][pos_x+1])
+                    if kartta.taulukko[pos_y+1][pos_x+1] != 3:
+                        if kartta.taulukko[pos_y+1][pos_x+1] != 2:
+                            solmu.luonnolliset.append(
+                                self.solmut[pos_y+1][pos_x+1])
+                        else:
+                            solmu.pakolliset.append(self.solmut[pos_y+1][pos_x+1])
             if pos_y != len(kartta.taulukko)-1:
                 if kartta.taulukko[pos_y+1][pos_x] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y+1][pos_x])
+                    if kartta.taulukko[pos_y+1][pos_x] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y+1][pos_x])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y+1][pos_x])
                 if kartta.taulukko[pos_y][pos_x-1] == 3 and kartta.taulukko[pos_y+1][pos_x-1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y+1][pos_x-1])
         if solmu.edellinen.koordinaatit[0] < pos_x and solmu.edellinen.koordinaatit[1] > pos_y:
             if pos_x != len(kartta.taulukko[0])-1:
                 if kartta.taulukko[pos_y][pos_x+1] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y][pos_x+1])
+                    if kartta.taulukko[pos_y][pos_x+1] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y][pos_x+1])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y][pos_x+1])
                 if kartta.taulukko[pos_y+1][pos_x] == 3 and kartta.taulukko[pos_y+1][pos_x+1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y+1][pos_x+1])
                 if pos_y != 0:
                     if kartta.taulukko[pos_y-1][pos_x+1] != 3:
-                        solmu.luonnolliset.append(
-                            self.solmut[pos_y-1][pos_x+1])
+                        if kartta.taulukko[pos_y-1][pos_x+1] != 2:
+                            solmu.luonnolliset.append(
+                                self.solmut[pos_y-1][pos_x+1])
+                        else:
+                            solmu.pakolliset.append(self.solmut[pos_y-1][pos_x+1])
             if pos_y != 0:
                 if kartta.taulukko[pos_y-1][pos_x] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y-1][pos_x])
+                    if kartta.taulukko[pos_y-1][pos_x] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y-1][pos_x])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y-1][pos_x])
                 if kartta.taulukko[pos_y][pos_x-1] == 3 and kartta.taulukko[pos_y-1][pos_x-1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y-1][pos_x-1])
         if solmu.edellinen.koordinaatit[0] > pos_x and solmu.edellinen.koordinaatit[1] > pos_y:
             if pos_x != 0:
                 if kartta.taulukko[pos_y][pos_x-1] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y][pos_x-1])
+                    if kartta.taulukko[pos_y][pos_x-1] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y][pos_x-1])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y][pos_x-1])
                 if kartta.taulukko[pos_y+1][pos_x] == 3 and kartta.taulukko[pos_y+1][pos_x-1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y+1][pos_x-1])
                 if pos_y != 0:
                     if kartta.taulukko[pos_y-1][pos_x-1] != 3:
-                        solmu.luonnolliset.append(
-                            self.solmut[pos_y-1][pos_x-1])
+                        if kartta.taulukko[pos_y-1][pos_x-1] != 2:
+                            solmu.luonnolliset.append(
+                                self.solmut[pos_y-1][pos_x-1])
+                        else:
+                            solmu.pakolliset.append(self.solmut[pos_y-1][pos_x-1])
             if pos_y != 0:
                 if kartta.taulukko[pos_y-1][pos_x] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y-1][pos_x])
+                    if kartta.taulukko[pos_y-1][pos_x] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y-1][pos_x])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y-1][pos_x])
                 if kartta.taulukko[pos_y][pos_x+1] == 3 and kartta.taulukko[pos_y-1][pos_x+1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y-1][pos_x+1])
         if solmu.edellinen.koordinaatit[0] > pos_x and solmu.edellinen.koordinaatit[1] < pos_y:
             if pos_x != 0:
                 if kartta.taulukko[pos_y][pos_x-1] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y][pos_x-1])
+                    if kartta.taulukko[pos_y][pos_x-1] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y][pos_x-1])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y][pos_x-1])
                 if kartta.taulukko[pos_y-1][pos_x] == 3 and kartta.taulukko[pos_y-1][pos_x-1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y-1][pos_x-1])
                 if pos_y != len(kartta.taulukko)-1:
                     if kartta.taulukko[pos_y+1][pos_x-1] != 3:
-                        solmu.luonnolliset.append(
-                            self.solmut[pos_y+1][pos_x-1])
+                        if kartta.taulukko[pos_y+1][pos_x-1] != 2:
+                            solmu.luonnolliset.append(
+                                self.solmut[pos_y+1][pos_x-1])
+                        else:
+                            solmu.pakolliset.append(self.solmut[pos_y+1][pos_x-1])
             if pos_y != len(kartta.taulukko)-1:
                 if kartta.taulukko[pos_y+1][pos_x] != 3:
-                    solmu.luonnolliset.append(self.solmut[pos_y+1][pos_x])
+                    if kartta.taulukko[pos_y+1][pos_x] != 2:
+                        solmu.luonnolliset.append(self.solmut[pos_y+1][pos_x])
+                    else:
+                        solmu.pakolliset.append(self.solmut[pos_y+1][pos_x])
                 if kartta.taulukko[pos_y][pos_x+1] == 3 and kartta.taulukko[pos_y+1][pos_x+1] != 3:
                     solmu.pakolliset.append(self.solmut[pos_y+1][pos_x+1])
 
@@ -257,7 +308,7 @@ class Jps:
 
     def hyppy(self, solmu, suunta):
 
-        # JPS:n tarvitsema hyppyfunktio. Vastaa luentomateriaalista löytyvässä JPS-dokumentaatiossa olevaa algoritmia 2.
+        # JPS:n tarvitsema hyppyfunktio.
 
         pos_x = solmu.koordinaatit[0]
         pos_y = solmu.koordinaatit[1]
@@ -282,10 +333,14 @@ class Jps:
             return None
         if seuraava.tyyppi == 3:
             return None
-        if seuraava.jumppoint:
+        if seuraava.hyppypiste:
             return None
         seuraava.tutkittu = True
         seuraava.edellinen = solmu
+        if suunta in [1, 3, 5, 7]:
+            seuraava.etaisyys = solmu.etaisyys + 7
+        else:
+            seuraava.etaisyys = solmu.etaisyys + 5
         self.karsi_naapurit(seuraava)
         if seuraava.koordinaatit == self.loppusolmu.koordinaatit:
             return seuraava
@@ -315,7 +370,7 @@ class Jps:
 
     def tunnista_seuraavat(self, solmu):
 
-        # JPS:n tarvitsema funktio seuraavien hyppypisteiden tunnistamista varten. Vastaa JPS-dokumentaation algoritmia 1.
+        # JPS:n tarvitsema funktio seuraavien hyppypisteiden tunnistamista varten.
 
         if solmu.koordinaatit != self.alkusolmu.koordinaatit:
             for i in solmu.pakolliset:
@@ -327,28 +382,33 @@ class Jps:
             seuraava = self.hyppy(solmu, self.suunta(solmu, naapuri))
             if seuraava != None:
                 solmu.seuraajat.append(seuraava)
-                seuraava.jumppoint = True
+                seuraava.hyppypiste = True
                 self.hyppypisteet.append(seuraava)
         return solmu.seuraajat
 
     def reitinhaku(self):
 
-        # JPS-algoritmi.
-
-        self.luo_solmut()
+        # JPS-algoritmi. Tämä käyttää apunaan tunnista_seuraavat-funktiota.
+        # Funktio tunnista_seuraavat vuorostaan käyttää funktioita hyppy ja suunta.
+        # Funktio hyppy käyttää funktiota karsi_naapurit.
 
         alku = time.time()
+        
+        self.luo_solmut()
 
         stack = self.tunnista_seuraavat(self.alkusolmu)
         while True:
             if len(stack) == 0:
                 break
             solmu = stack.pop(0)
+            if solmu.koordinaatit == self.loppusolmu.koordinaatit:
+                break
             for i in self.tunnista_seuraavat(solmu):
                 stack.append(i)
 
         loppu = time.time()
 
+        # Piirretään löydetty polku kartalle:
         solmu = self.loppusolmu
         while True:
             solmu = solmu.edellinen
@@ -357,8 +417,16 @@ class Jps:
             pos_x = solmu.koordinaatit[0]
             pos_y = solmu.koordinaatit[1]
             kartta.taulukko[pos_y][pos_x] = 4
+
+        # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
 #        for solmu in self.hyppypisteet:
-#            pos_x = solmu.koordinaatit[0]
-#            pos_y = solmu.koordinaatit[1]
-#            kartta.taulukko[pos_y][pos_x] = 5
+#            if solmu.koordinaatit != self.loppusolmu.koordinaatit:
+#                pos_x = solmu.koordinaatit[0]
+#                pos_y = solmu.koordinaatit[1]
+#                kartta.taulukko[pos_y][pos_x] = 5
+
+        print()
+        print("Jump Point Search: ")
+        print(f"Polun pituus: {self.loppusolmu.etaisyys}")
         print(f"Aikaa kului: {loppu-alku} s")
+        print()
