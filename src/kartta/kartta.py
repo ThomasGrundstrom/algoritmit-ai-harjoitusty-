@@ -39,6 +39,4 @@ class Kartta:
 #            self.taulukko[i][39] = 3
 
 
-
-
 kartta = Kartta()
