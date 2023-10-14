@@ -1,6 +1,6 @@
 # Käyttöohje
 
-### Kartan lisääminen
+## Kartan lisääminen
 
 Ohjelman käyttämää karttaa voi muokata kartta.py-tiedostossa.
 - Polku tiedostoon ohjelman juuresta: --> src --> kartta --> kartta.py
@@ -12,7 +12,7 @@ Tiedostossa voi luoda vapaavalintaisen kokoisen kartan muodostamalla kaksiulotte
 4. Valitse kartalta jokin alkupiste ja vaihda valitussa kohdassa olevan numeron tilalle 1.
 5. Valitse kartalta loppupiste ja vaihda loppupisteen kohdalla olevan numeron tilalle 2.
 
-#### Huomioitavia asioita kartan luomisessa:
+### Huomioitavia asioita kartan luomisessa:
 
 - **Jos et ole varma siitä, minkä näköinen tiedostossa luomasi kartta on, sen ulkonäköä voi tarkastella riippuvuuksien asentamisen jälkeen käynnistämällä ohjelman. Tiedosto kartta.py sisältää valmiiksi joitakin esimerkkikarttoja, jotka saa käyttöön poistamalla niiden edestä #-merkit.**
 - **Ohjelman käynnistyttyä pygamen näytölle piirtyvässä kartassa vihreä ruutu on lähtöruutu, punainen on maaliruutu, harmaat ruudut ovat tyhjiä ruutuja ja mustat ruudut ovat esteruutuja.**
@@ -21,12 +21,12 @@ Tiedostossa voi luoda vapaavalintaisen kokoisen kartan muodostamalla kaksiulotte
 - Jos kartta.py-tiedostoon ei tehdä mitään muutoksia, oletuksena tuleva kartta on 180 ruutua leveä ja 100 ruutua korkea, eikä sisällä yhtään esteitä. Oletuskartalla lähtöruutu on vasemmassa yläkulmassa ja maaliruutu oikeassa alakulmassa.
 - Yritän ehtiä tekemään ohjelmaan mahdollisuuden luoda kartta helpommallakin tavalla.
 
-### Ohjelman käynnistäminen
+## Ohjelman käynnistäminen
 
 - Asenna riippuvuudet komennolla *poetry install*
 - Käynnistä ohjelma komennolla *poetry run invoke start*
 
-### Reitinhaku kartalla
+## Reitinhaku kartalla
 
 **Huom! Polkujen laskettu pituus muodostuu seuraavasti:**
 - Kun siirrytään ruudusta toiseen joko vertikaalisesti tai horisontaalisesti, polun pituuteen lisätään 5.
@@ -40,12 +40,12 @@ Reitinhaun lähtöruudusta maaliruutuun voi toteuttaa kahdella eri algoritmilla:
 
 2. Jump Point Search: Paina näppäimistöllä j-näppäintä. Kartalle piirtyy sinisistä ruuduista muodostuva optimaalisen mittainen polku lähtö- ja maaliruutujen välille. Komentoriville tulostuu tieto siitä, kuinka kauan reitinhaku kesti ja kuinka pitkä löydetty polku on.
 
-### Testit
+## Testit
 
 - Ohjelman testit saa suoritettua komennolla *poetry run invoke test*
 - Testikattavuuden saa tallennettua htmlcov-kansion index.html-tiedostoon komennolla *poetry run invoke coverage-report*
 
-### Muut
+## Muut
 
 - Ohjelman koodia sisältävien tiedostojen pylint-tarkistuksen tulokset saa näkyviin komennolla *poetry run invoke lint*
 - Ohjelman koodia sisältävien tiedostojen formatoinnin saa tehtyä komennolla *poetry run invoke format*
