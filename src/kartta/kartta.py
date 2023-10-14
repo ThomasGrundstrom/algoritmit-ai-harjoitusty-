@@ -32,9 +32,12 @@ class Kartta:
 #                for i in range(1, 179):
 #                    self.taulukko[j*2][i] = 3
 
+#        for j in range(50):
+#            for i in range(1, 179):
+#                self.taulukko[j*2][i] = 3
+
 #        for i in range(39):
 #            self.taulukko[20][i] = 3
-
 #        for i in range(20, 98):
 #            self.taulukko[i][39] = 3
 
