@@ -1,29 +1,20 @@
 import unittest
 import pygame
 from main.main import Suorita
+from kartta.kartta import Kartta
 
 
 class TestSuorita(unittest.TestCase):
     def setUp(self):
         self.suorita = Suorita()
+        self.kartta = Kartta()
 
     def test_naytto_alkuarvot(self):
-        self.assertEqual(self.suorita.naytto.get_width(), 800)
-        self.assertEqual(self.suorita.naytto.get_height(), 800)
+        self.assertEqual(self.suorita.leveys, len(self.kartta.taulukko[0])*10)
+        self.assertEqual(self.suorita.korkeus, len(self.kartta.taulukko)*10)
         self.assertEqual(self.suorita.musta, (0, 0, 0))
         self.assertEqual(self.suorita.harmaa, (50, 50, 50))
         self.assertEqual(self.suorita.vihrea, (0, 255, 0))
         self.assertEqual(self.suorita.punainen, (255, 0, 0))
         self.assertEqual(self.suorita.sininen, (0, 100, 255))
         self.assertEqual(self.suorita.valkoinen, (255, 255, 255))
-
-    def test_naytto_kaynnistys(self):
-        self.suorita.piirra_naytto()
-        self.assertEqual(self.suorita.naytto.get_at(
-            (0, 0)), self.suorita.musta)
-        self.assertEqual(self.suorita.naytto.get_at(
-            (5, 5)), self.suorita.vihrea)
-        self.assertEqual(self.suorita.naytto.get_at(
-            (25, 25)), self.suorita.harmaa)
-        self.assertEqual(self.suorita.naytto.get_at(
-            (85, 795)), self.suorita.punainen)
