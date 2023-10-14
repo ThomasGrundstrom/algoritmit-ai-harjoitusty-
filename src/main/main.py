@@ -58,6 +58,17 @@ class Suorita:
                                      j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
         pygame.display.flip()
         self.kello.tick(60)
+    
+    def nollaa_piirretyt_polut(self):
+
+        # Poistetaan löydetty polku kartalta.
+
+        for j in range(len(kartta.taulukko)):
+            for i in range(len(kartta.taulukko[j])):
+                if kartta.taulukko[j][i] == 4:
+                    kartta.taulukko[j][i] = 0
+                elif kartta.taulukko[j][i] == 5:
+                    kartta.taulukko[j][i] = 0
 
     def silmukka(self):
 
@@ -71,6 +82,9 @@ class Suorita:
                 tila.tila = 0
             if tila.tila == 2:
                 Jps(kartta.taulukko).reitinhaku()
+                tila.tila = 0
+            if tila.tila == 3:
+                self.nollaa_piirretyt_polut()
                 tila.tila = 0
 
 
