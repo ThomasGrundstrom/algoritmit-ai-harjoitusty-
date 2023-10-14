@@ -67,10 +67,10 @@ class Suorita:
             self.piirra_naytto()
             tapahtumat.tutki_tapahtumat()
             if tila.tila == 1:
-                Dijkstra().reitinhaku()
+                Dijkstra(kartta.taulukko).reitinhaku()
                 tila.tila = 0
             if tila.tila == 2:
-                Jps().reitinhaku()
+                Jps(kartta.taulukko).reitinhaku()
                 tila.tila = 0
 
 
