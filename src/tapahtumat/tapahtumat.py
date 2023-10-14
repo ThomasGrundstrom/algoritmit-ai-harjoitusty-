@@ -26,6 +26,8 @@ class Tapahtumat:
                     tila.tila = 1
                 if tapahtuma.key == pygame.K_j:
                     tila.tila = 2
+                if tapahtuma.key == pygame.K_c:
+                    tila.tila = 3
 
 
 tapahtumat = Tapahtumat()
