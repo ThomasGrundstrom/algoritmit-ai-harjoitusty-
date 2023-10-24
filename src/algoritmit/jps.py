@@ -158,6 +158,10 @@ class Jps:
         # Määrittelee, mitkä tutkittavan solmun naapureista ovat tarpeellisia käydä läpi.
         # Tutkittavat naapurisolmut riippuvat suunnasta, josta solmuun on saavuttu sekä siitä, onko naapurisolmujen joukossa esteitä.
 
+        solmu.naapurit = []
+        solmu.pakolliset = []
+        solmu.luonnolliset = []
+
         pos_x = solmu.koordinaatit[0]
         pos_y = solmu.koordinaatit[1]
 
