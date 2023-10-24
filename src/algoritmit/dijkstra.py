@@ -199,7 +199,6 @@ class Dijkstra:
         while self.keko.pituus() != 0:
             solmu = self.keko.poista_lahin()
             if solmu.koordinaatit == self.loppusolmu.koordinaatit:
-                loppu = time.time()
                 break
             if solmu.kasitelty:
                 continue
@@ -215,18 +214,24 @@ class Dijkstra:
                         self.keko.lisaa_jonoon(
                             kaari.loppu, kaari.loppu.etaisyys)
                         kaari.loppu.edellinen = solmu
-        while solmu.edellinen.koordinaatit != self.alkusolmu.koordinaatit:
-            self.polku.append(solmu.edellinen)
-            solmu = solmu.edellinen
+        if self.loppusolmu.etaisyys != float("inf"):
+            while solmu.edellinen.koordinaatit != self.alkusolmu.koordinaatit:
+                self.polku.append(solmu.edellinen)
+                solmu = solmu.edellinen
+        loppu = time.time()
+        
         print()
         print("Dijkstra: ")
-        print(f"Polun pituus: {self.loppusolmu.etaisyys}")
-#        print(f"Ruutujen välisiä siirtymiä polulla: {len(self.polku)+1}")
+        if self.loppusolmu.etaisyys == float("inf"):
+            print("Polkua ei löytynyt.")
+        else:
+            print(f"Polun pituus: {self.loppusolmu.etaisyys}")
         print(f"Aikaa kului: {loppu-alku} s.")
         print()
 
-        # Piirretään löydetty polku kartalle.
-        for solmu in self.polku:
-            pos_x = solmu.koordinaatit[0]
-            pos_y = solmu.koordinaatit[1]
-            self.kartta[pos_y][pos_x] = 4
+        if self.loppusolmu.etaisyys != float("inf"):
+            # Piirretään löydetty polku kartalle.
+            for solmu in self.polku:
+                pos_x = solmu.koordinaatit[0]
+                pos_y = solmu.koordinaatit[1]
+                self.kartta[pos_y][pos_x] = 4
