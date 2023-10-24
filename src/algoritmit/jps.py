@@ -350,12 +350,12 @@ class Jps:
         if uusi < seuraava.etaisyys:
             seuraava.etaisyys = uusi
             seuraava.edellinen = solmu
+        self.karsi_naapurit(seuraava)
+        for solmu in seuraava.naapurit:
+            if solmu.tyyppi == 2:
+                return seuraava
         if seuraava.tyyppi == 2:
             return seuraava
-        self.karsi_naapurit(seuraava)
-#        for solmu in seuraava.naapurit:
-#            if solmu.tyyppi == 2:
-#                return seuraava
         if len(seuraava.pakolliset) > 0:
             return seuraava
         if suunta == 1:
