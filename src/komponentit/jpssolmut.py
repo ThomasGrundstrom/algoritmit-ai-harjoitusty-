@@ -12,4 +12,4 @@ class Jpssolmu:
         self.edellinen = None
         self.tutkittu = False
         self.hyppypiste = False
-        self.etaisyys = None
+        self.etaisyys = float("inf")
