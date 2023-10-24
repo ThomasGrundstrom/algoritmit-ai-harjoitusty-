@@ -6,12 +6,14 @@ from komponentit.jpssolmut import Jpssolmu
 class DiagonalFirstPrio:
     def __init__(self, lista):
         self.lista = lista
+        self.indeksi = 0
 
     def lisaa_listaan(self, solmu):
+#        self.lista.append(solmu)
         pos_x = solmu.koordinaatit[0]
         pos_y = solmu.koordinaatit[1]
         if pos_x != solmu.edellinen.koordinaatit[0] and pos_y != solmu.edellinen.koordinaatit[1]:
-            self.lista.insert(0, solmu)
+            self.lista.insert(self.indeksi, solmu)
         else:
             self.lista.append(solmu)
 
@@ -33,6 +35,7 @@ class Jps:
         self.polku = []
         self.hyppypisteet = []
         self.kartta = kartta
+        self.tutkitut = []
 
     def luo_solmut(self):
 
@@ -328,25 +331,31 @@ class Jps:
         if seuraava.tyyppi == 3:
             return None
         if seuraava.hyppypiste:
-            return None
-        seuraava.tutkittu = True
-        if seuraava.etaisyys == None:
-            seuraava.edellinen = solmu
-            if suunta in [1, 3, 5, 7]:
-                seuraava.etaisyys = solmu.etaisyys + 7
-            else:
-                seuraava.etaisyys = solmu.etaisyys + 5
-        elif seuraava.etaisyys != None:
             if suunta in [1, 3, 5, 7]:
                 uusi = solmu.etaisyys + 7
-            else:
+            if suunta in [0, 2, 4, 6]:
                 uusi = solmu.etaisyys + 5
             if uusi < seuraava.etaisyys:
-                seuraava.etaisyys = uusi
                 seuraava.edellinen = solmu
-        self.karsi_naapurit(seuraava)
-        if seuraava.koordinaatit == self.loppusolmu.koordinaatit:
+                seuraava.etaisyys = uusi
+                return seuraava
+            return None
+        if seuraava.tyyppi == 1:
+            return None
+        seuraava.tutkittu = True
+        if suunta in [1, 3, 5, 7]:
+            uusi = solmu.etaisyys + 7
+        elif suunta in [0, 2, 4, 6]:
+            uusi = solmu.etaisyys + 5
+        if uusi < seuraava.etaisyys:
+            seuraava.etaisyys = uusi
+            seuraava.edellinen = solmu
+        if seuraava.tyyppi == 2:
             return seuraava
+        self.karsi_naapurit(seuraava)
+#        for solmu in seuraava.naapurit:
+#            if solmu.tyyppi == 2:
+#                return seuraava
         if len(seuraava.pakolliset) > 0:
             return seuraava
         if suunta == 1:
@@ -404,32 +413,36 @@ class Jps:
             if stack.pituus() == 0:
                 break
             solmu = stack.poista_listasta()
-#            if solmu.koordinaatit == self.loppusolmu.koordinaatit:
-#                break
+            stack.indeksi = stack.pituus()
             for i in self.tunnista_seuraavat(solmu):
                 stack.lisaa_listaan(i)
+            self.tutkitut.append(solmu)
 
         loppu = time.time()
 
-        # Piirretään löydetty polku kartalle:
-        solmu = self.loppusolmu
-        while True:
-            solmu = solmu.edellinen
-            if solmu.koordinaatit == self.alkusolmu.koordinaatit:
-                break
-            pos_x = solmu.koordinaatit[0]
-            pos_y = solmu.koordinaatit[1]
-            self.kartta[pos_y][pos_x] = 4
-
-        # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
-#        for solmu in self.hyppypisteet:
-#            if solmu.koordinaatit != self.loppusolmu.koordinaatit:
-#                pos_x = solmu.koordinaatit[0]
-#                pos_y = solmu.koordinaatit[1]
-#                kartta.taulukko[pos_y][pos_x] = 5
+        if self.loppusolmu.etaisyys != None:
+            # Piirretään löydetty polku kartalle:
+            solmu = self.loppusolmu
+            while True:
+                solmu = solmu.edellinen
+                if solmu.koordinaatit == self.alkusolmu.koordinaatit:
+                    break
+                pos_x = solmu.koordinaatit[0]
+                pos_y = solmu.koordinaatit[1]
+                self.kartta[pos_y][pos_x] = 4
+    
+            # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
+#            for solmu in self.hyppypisteet:
+#                if solmu.koordinaatit != self.loppusolmu.koordinaatit:
+#                    pos_x = solmu.koordinaatit[0]
+#                    pos_y = solmu.koordinaatit[1]
+#                    kartta.taulukko[pos_y][pos_x] = 5
 
         print()
         print("Jump Point Search: ")
-        print(f"Polun pituus: {self.loppusolmu.etaisyys}")
+        if self.loppusolmu.etaisyys == None:
+            print("Polkua ei löytynyt.")
+        else:
+            print(f"Polun pituus: {self.loppusolmu.etaisyys}")
         print(f"Aikaa kului: {loppu-alku} s.")
         print()
