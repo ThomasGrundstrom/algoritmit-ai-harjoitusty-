@@ -3,25 +3,25 @@ from kartta.kartta import kartta
 from komponentit.jpssolmut import Jpssolmu
 
 
-class DiagonalFirstPrio:
-    def __init__(self, lista):
-        self.lista = lista
-        self.indeksi = 0
-
-    def lisaa_listaan(self, solmu):
+# class DiagonalFirstPrio:
+#    def __init__(self, lista):
+#        self.lista = lista
+#        self.indeksi = 0
+#
+#    def lisaa_listaan(self, solmu):
 #        self.lista.append(solmu)
-        pos_x = solmu.koordinaatit[0]
-        pos_y = solmu.koordinaatit[1]
-        if pos_x != solmu.edellinen.koordinaatit[0] and pos_y != solmu.edellinen.koordinaatit[1]:
-            self.lista.insert(self.indeksi, solmu)
-        else:
-            self.lista.append(solmu)
-
-    def poista_listasta(self):
-        return (self.lista.pop(0))
-
-    def pituus(self):
-        return (len(self.lista))
+#        pos_x = solmu.koordinaatit[0]
+#        pos_y = solmu.koordinaatit[1]
+#        if pos_x != solmu.edellinen.koordinaatit[0] and pos_y != solmu.edellinen.koordinaatit[1]:
+#            self.lista.insert(self.indeksi, solmu)
+#        else:
+#            self.lista.append(solmu)
+#
+#    def poista_listasta(self):
+#        return (self.lista.pop(0))
+#
+#    def pituus(self):
+#        return (len(self.lista))
 
 
 class Jps:
@@ -158,9 +158,9 @@ class Jps:
         # Määrittelee, mitkä tutkittavan solmun naapureista ovat tarpeellisia käydä läpi.
         # Tutkittavat naapurisolmut riippuvat suunnasta, josta solmuun on saavuttu sekä siitä, onko naapurisolmujen joukossa esteitä.
 
-        solmu.naapurit = []
-        solmu.pakolliset = []
-        solmu.luonnolliset = []
+        #        solmu.naapurit = []
+        #        solmu.pakolliset = []
+        #        solmu.luonnolliset = []
 
         pos_x = solmu.koordinaatit[0]
         pos_y = solmu.koordinaatit[1]
@@ -342,7 +342,7 @@ class Jps:
             if uusi < seuraava.etaisyys:
                 seuraava.edellinen = solmu
                 seuraava.etaisyys = uusi
-                return seuraava
+                return self.hyppy(seuraava, suunta)
             return None
         if seuraava.tyyppi == 1:
             return None
@@ -412,14 +412,23 @@ class Jps:
 
         self.luo_solmut()
 
-        stack = DiagonalFirstPrio(self.tunnista_seuraavat(self.alkusolmu))
+#        stack = DiagonalFirstPrio(self.tunnista_seuraavat(self.alkusolmu))
+#        while True:
+#            if stack.pituus() == 0:
+#                break
+#            solmu = stack.poista_listasta()
+#            stack.indeksi = stack.pituus()
+#            for i in self.tunnista_seuraavat(solmu):
+#                stack.lisaa_listaan(i)
+#            self.tutkitut.append(solmu)
+
+        stack = self.tunnista_seuraavat(self.alkusolmu)
         while True:
-            if stack.pituus() == 0:
+            if len(stack) == 0:
                 break
-            solmu = stack.poista_listasta()
-            stack.indeksi = stack.pituus()
+            solmu = stack.pop(0)
             for i in self.tunnista_seuraavat(solmu):
-                stack.lisaa_listaan(i)
+                stack.append(i)
             self.tutkitut.append(solmu)
 
         loppu = time.time()
@@ -434,7 +443,7 @@ class Jps:
                 pos_x = solmu.koordinaatit[0]
                 pos_y = solmu.koordinaatit[1]
                 self.kartta[pos_y][pos_x] = 4
-    
+
             # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
 #            for solmu in self.hyppypisteet:
 #                if solmu.koordinaatit != self.loppusolmu.koordinaatit:

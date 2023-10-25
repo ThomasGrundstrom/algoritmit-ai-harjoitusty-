@@ -9,7 +9,7 @@ class Kartta:
 
 #        for j in range(25):
 #            if j != 0:
-#                for i in range(180):
+#                for i in range(179):
 #                    self.taulukko[j*4][i] = 3
 #        for j in range(1, 24):
 #            for i in range(1, 180):

@@ -219,7 +219,7 @@ class Dijkstra:
                 self.polku.append(solmu.edellinen)
                 solmu = solmu.edellinen
         loppu = time.time()
-        
+
         print()
         print("Dijkstra: ")
         if self.loppusolmu.etaisyys == float("inf"):

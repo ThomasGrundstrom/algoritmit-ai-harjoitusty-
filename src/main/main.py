@@ -58,7 +58,7 @@ class Suorita:
                                      j * ruutu_y_pos + 1, ruutu_leveys, ruutu_korkeus))
         pygame.display.flip()
         self.kello.tick(60)
-    
+
     def nollaa_piirretyt_polut(self):
 
         # Poistetaan löydetty polku kartalta.
