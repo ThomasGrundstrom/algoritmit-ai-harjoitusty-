@@ -3,7 +3,7 @@ from kartta.kartta import kartta
 from komponentit.jpssolmut import Jpssolmu
 
 
-# class DiagonalFirstPrio:
+#class DiagonalFirstPrio:
 #    def __init__(self, lista):
 #        self.lista = lista
 #        self.indeksi = 0
