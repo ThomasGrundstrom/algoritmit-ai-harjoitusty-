@@ -19,9 +19,8 @@ Tiedostossa voi luoda vapaavalintaisen kokoisen kartan muodostamalla kaksiulotte
 - **Jos et ole varma siitä, minkä näköinen tiedostossa luomasi kartta on, sen ulkonäköä voi tarkastella riippuvuuksien asentamisen jälkeen käynnistämällä ohjelman. Tiedosto kartta.py sisältää valmiiksi joitakin esimerkkikarttoja, jotka saa käyttöön poistamalla niiden edestä #-merkit.**
 - **Ohjelman käynnistyttyä pygamen näytölle piirtyvässä kartassa vihreä ruutu on lähtöruutu, punainen on maaliruutu, harmaat ruudut ovat tyhjiä ruutuja ja mustat ruudut ovat esteruutuja.**
 - Suositeltava kartan maksimileveys on 180 ja -korkeus 100.
-- Ohjelma kaatuu, jos valittujen lähtö- ja maalipisteiden välille ei ole mahdollista luoda polkua. (Tämä muuttuu vielä, jos aika riittää)
+- Jos valittujen lähtö- ja maaliruutujen välille ei ole mahdollista luoda polkua, ohjelma tulostaa tiedon tästä, eikä piirrä kartalle mitään.
 - Jos kartta.py-tiedostoon ei tehdä mitään muutoksia, oletuksena tuleva kartta on 180 ruutua leveä ja 100 ruutua korkea, eikä sisällä yhtään esteitä. Oletuskartalla lähtöruutu on vasemmassa yläkulmassa ja maaliruutu oikeassa alakulmassa.
-- Yritän ehtiä tekemään ohjelmaan mahdollisuuden luoda kartta helpommallakin tavalla.
 
 
 ## Ohjelman käynnistäminen
