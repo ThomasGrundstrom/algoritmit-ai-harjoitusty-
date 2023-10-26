@@ -158,9 +158,9 @@ class Jps:
         # Määrittelee, mitkä tutkittavan solmun naapureista ovat tarpeellisia käydä läpi.
         # Tutkittavat naapurisolmut riippuvat suunnasta, josta solmuun on saavuttu sekä siitä, onko naapurisolmujen joukossa esteitä.
 
-        #        solmu.naapurit = []
-        #        solmu.pakolliset = []
-        #        solmu.luonnolliset = []
+        solmu.naapurit = []
+        solmu.pakolliset = []
+        solmu.luonnolliset = []
 
         pos_x = solmu.koordinaatit[0]
         pos_y = solmu.koordinaatit[1]
@@ -342,6 +342,7 @@ class Jps:
             if uusi < seuraava.etaisyys:
                 seuraava.edellinen = solmu
                 seuraava.etaisyys = uusi
+                self.karsi_naapurit(seuraava)
                 return self.hyppy(seuraava, suunta)
             return None
         if seuraava.tyyppi == 1:
