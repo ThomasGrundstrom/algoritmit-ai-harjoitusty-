@@ -92,6 +92,19 @@ class testDijkstra(unittest.TestCase):
         self.dijkstra = Dijkstra(kartta)
         self.dijkstra.reitinhaku()
         self.assertEqual(self.dijkstra.loppusolmu.etaisyys, 1005)
+        kartta = self.nollaa_kartta()
+        for j in range(1, 50):
+            for i in range(1, 90):
+                kartta[j*2][i*2] = 3
+        self.dijkstra = Dijkstra(kartta)
+        self.dijkstra.reitinhaku()
+        self.assertEqual(self.dijkstra.loppusolmu.etaisyys, 1093)
+        kartta = self.nollaa_kartta()
+        for j in range(len(kartta)):
+            kartta[j][5] = 3
+        self.dijkstra = Dijkstra(kartta)
+        self.dijkstra.reitinhaku()
+        self.assertEqual(self.dijkstra.loppusolmu.etaisyys, float("inf"))
 
     def nollaa_kartta(self):
         kartta = [[0 for i in range(180)] for j in range(100)]

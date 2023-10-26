@@ -191,7 +191,9 @@ class Dijkstra:
         alku = time.time()
 
         # Luodaan ensin verkko algoritmia varten.
+        valku = time.time()
         self.luo_verkko()
+        vloppu = time.time()
 
         # Varsinainen Dijkstran algoritmi.
 
@@ -226,7 +228,8 @@ class Dijkstra:
             print("Polkua ei löytynyt.")
         else:
             print(f"Polun pituus: {self.loppusolmu.etaisyys}")
-        print(f"Aikaa kului: {loppu-alku} s.")
+        print(f"Verkon luomiseen kulunut aika: {vloppu-valku} s")
+        print(f"Aikaa kului yhteensä: {loppu-alku} s.")
         print()
 
         if self.loppusolmu.etaisyys != float("inf"):
@@ -235,3 +238,12 @@ class Dijkstra:
                 pos_x = solmu.koordinaatit[0]
                 pos_y = solmu.koordinaatit[1]
                 self.kartta[pos_y][pos_x] = 4
+
+        # Alla olevalla koodilla saa värjättyä tutkitut ruudut kartalla.
+#        for j in range(len(self.solmut)):
+#            for i in range(len(self.solmut[j])):
+#                pos_x = self.solmut[j][i].koordinaatit[0]
+#                pos_y = self.solmut[j][i].koordinaatit[1]
+#                if self.solmut[j][i].koordinaatit != self.alkusolmu.koordinaatit:
+#                    if self.solmut[j][i].kasitelty:
+#                        self.kartta[pos_y][pos_x] = 5

@@ -3,27 +3,6 @@ from kartta.kartta import kartta
 from komponentit.jpssolmut import Jpssolmu
 
 
-# class DiagonalFirstPrio:
-#    def __init__(self, lista):
-#        self.lista = lista
-#        self.indeksi = 0
-#
-#    def lisaa_listaan(self, solmu):
-#        self.lista.append(solmu)
-#        pos_x = solmu.koordinaatit[0]
-#        pos_y = solmu.koordinaatit[1]
-#        if pos_x != solmu.edellinen.koordinaatit[0] and pos_y != solmu.edellinen.koordinaatit[1]:
-#            self.lista.insert(self.indeksi, solmu)
-#        else:
-#            self.lista.append(solmu)
-#
-#    def poista_listasta(self):
-#        return (self.lista.pop(0))
-#
-#    def pituus(self):
-#        return (len(self.lista))
-
-
 class Jps:
 
     # Luokka JPS-algoritmin toteutusta varten.
@@ -411,17 +390,9 @@ class Jps:
 
         alku = time.time()
 
+        alku2 = time.time()
         self.luo_solmut()
-
-#        stack = DiagonalFirstPrio(self.tunnista_seuraavat(self.alkusolmu))
-#        while True:
-#            if stack.pituus() == 0:
-#                break
-#            solmu = stack.poista_listasta()
-#            stack.indeksi = stack.pituus()
-#            for i in self.tunnista_seuraavat(solmu):
-#                stack.lisaa_listaan(i)
-#            self.tutkitut.append(solmu)
+        loppu2 = time.time()
 
         stack = self.tunnista_seuraavat(self.alkusolmu)
         while True:
@@ -434,7 +405,7 @@ class Jps:
 
         loppu = time.time()
 
-        if self.loppusolmu.etaisyys != None:
+        if self.loppusolmu.etaisyys != float("inf"):
             # Piirretään löydetty polku kartalle:
             solmu = self.loppusolmu
             while True:
@@ -450,13 +421,23 @@ class Jps:
 #                if solmu.koordinaatit != self.loppusolmu.koordinaatit:
 #                    pos_x = solmu.koordinaatit[0]
 #                    pos_y = solmu.koordinaatit[1]
-#                    kartta.taulukko[pos_y][pos_x] = 5
+#                    self.kartta[pos_y][pos_x] = 5
+
+        # Alla olevalla koodilla saa värjättyä tutkitut ruudut kartalla.
+#        for j in range(len(self.solmut)):
+#            for i in range(len(self.solmut[j])):
+#                pos_x = self.solmut[j][i].koordinaatit[0]
+#                pos_y = self.solmut[j][i].koordinaatit[1]
+#                if self.solmut[j][i].koordinaatit != self.loppusolmu.koordinaatit:
+#                    if self.solmut[j][i].tutkittu:
+#                        self.kartta[pos_y][pos_x] = 5
 
         print()
         print("Jump Point Search: ")
-        if self.loppusolmu.etaisyys == None:
+        if self.loppusolmu.etaisyys == float("inf"):
             print("Polkua ei löytynyt.")
         else:
             print(f"Polun pituus: {self.loppusolmu.etaisyys}")
+        print(f"Solmujen luomiseen kulunut aika: {loppu2-alku2} s")
         print(f"Aikaa kului: {loppu-alku} s.")
         print()
