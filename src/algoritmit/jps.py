@@ -1,6 +1,53 @@
 import time
+from math import sqrt
 from kartta.kartta import kartta
 from komponentit.jpssolmut import Jpssolmu
+
+class Priorityqueue:
+    def __init__(self, loppusolmu):
+        self.jono = {}
+        self.lista = []
+        self.loppu_x = loppusolmu.koordinaatit[0]
+        self.loppu_y = loppusolmu.koordinaatit[1]
+    
+    def lisaa_jonoon(self, solmu):
+        pos_x = solmu.koordinaatit[0]
+        pos_y = solmu.koordinaatit[1]
+        oletus = 0
+        while True:
+            if pos_x == self.loppu_x and pos_y == self.loppu_y:
+                break
+            if pos_x != self.loppu_x and pos_y != self.loppu_y:
+                oletus += sqrt(2)
+                if pos_x < self.loppu_x:
+                    pos_x += 1
+                if pos_x > self.loppu_x:
+                    pos_x -= 1
+                if pos_y < self.loppu_y:
+                    pos_y += 1
+                if pos_y > self.loppu_y:
+                    pos_y -= 1
+            if pos_x != self.loppu_x and pos_y == self.loppu_y:
+                oletus += 1
+                if pos_x < self.loppu_x:
+                    pos_x += 1
+                if pos_x > self.loppu_x:
+                    pos_x -= 1
+            if pos_x == self.loppu_x and pos_y != self.loppu_y:
+                oletus += 1
+                if pos_y < self.loppu_y:
+                    pos_y += 1
+                if pos_y > self.loppu_y:
+                    pos_y -= 1
+        self.jono[solmu] = oletus + solmu.etaisyys
+    
+    def poista_lahin(self):
+        lahin = min(self.jono, key=lambda solmu: self.jono[solmu])
+        del self.jono[lahin]
+        return lahin
+    
+    def pituus(self):
+        return len(self.jono)
 
 
 class Jps:
@@ -313,28 +360,43 @@ class Jps:
             return None
         if seuraava.tyyppi == 3:
             return None
+        
+#        if suunta in [1, 3, 5, 7]:
+#            uusi = solmu.etaisyys + sqrt(2)
+#        if suunta in [0, 2, 4, 6]:
+#            uusi = solmu.etaisyys + 1
+#        if uusi > seuraava.etaisyys:
+#            return None
+#        seuraava.edellinen = solmu
+#        seuraava.etaisyys = uusi
+#        self.karsi_naapurit(seuraava)
+#        if seuraava.tyyppi == 2:
+#            return seuraava
+#        if len(seuraava.pakolliset) != 0:
+#            return seuraava
+
+        if seuraava.tyyppi == 1:
+            return None
         if seuraava.hyppypiste:
             if suunta in [1, 3, 5, 7]:
-                uusi = solmu.etaisyys + 7
+                uusi = solmu.etaisyys + sqrt(2)
             if suunta in [0, 2, 4, 6]:
-                uusi = solmu.etaisyys + 5
+                uusi = solmu.etaisyys + 1
             if uusi < seuraava.etaisyys:
                 seuraava.edellinen = solmu
                 seuraava.etaisyys = uusi
                 self.karsi_naapurit(seuraava)
                 return self.hyppy(seuraava, suunta)
             return None
-        if seuraava.tyyppi == 1:
-            return None
-        seuraava.tutkittu = True
         if suunta in [1, 3, 5, 7]:
-            uusi = solmu.etaisyys + 7
-        elif suunta in [0, 2, 4, 6]:
-            uusi = solmu.etaisyys + 5
+            uusi = solmu.etaisyys + sqrt(2)
+        if suunta in [0, 2, 4, 6]:
+            uusi = solmu.etaisyys + 1
         if uusi < seuraava.etaisyys:
             seuraava.etaisyys = uusi
             seuraava.edellinen = solmu
         self.karsi_naapurit(seuraava)
+        seuraava.tutkittu = True
         for solmu in seuraava.naapurit:
             if solmu.tyyppi == 2:
                 return seuraava
@@ -394,14 +456,26 @@ class Jps:
         self.luo_solmut()
         loppu2 = time.time()
 
-        stack = self.tunnista_seuraavat(self.alkusolmu)
+#        stack = self.tunnista_seuraavat(self.alkusolmu)
+#        while True:
+#            if len(stack) == 0:
+#                break
+#            solmu = stack.pop(0)
+#            for i in self.tunnista_seuraavat(solmu):
+#                stack.append(i)
+#            self.tutkitut.append(solmu)
+
+        stack = Priorityqueue(self.loppusolmu)
+        for solmu in self.tunnista_seuraavat(self.alkusolmu):
+            stack.lisaa_jonoon(solmu)
         while True:
-            if len(stack) == 0:
+            if stack.pituus() == 0:
                 break
-            solmu = stack.pop(0)
+            solmu = stack.poista_lahin()
+            if solmu.tyyppi == 2:
+                break
             for i in self.tunnista_seuraavat(solmu):
-                stack.append(i)
-            self.tutkitut.append(solmu)
+                stack.lisaa_jonoon(i)
 
         loppu = time.time()
 
@@ -437,7 +511,7 @@ class Jps:
         if self.loppusolmu.etaisyys == float("inf"):
             print("Polkua ei löytynyt.")
         else:
-            print(f"Polun pituus: {self.loppusolmu.etaisyys}")
-        print(f"Solmujen luomiseen kulunut aika: {loppu2-alku2} s")
+            print(f"Polun pituus: {self.loppusolmu.etaisyys:.2f}")
+#        print(f"Solmujen luomiseen kulunut aika: {loppu2-alku2} s")
         print(f"Aikaa kului: {loppu-alku} s.")
         print()

@@ -1,5 +1,6 @@
 import time
 import heapq
+from math import sqrt
 from kartta.kartta import kartta
 from komponentit.solmut import Solmu
 from komponentit.kaaret import Kaari
@@ -57,132 +58,132 @@ class Dijkstra:
                     if i > 0 and i < len(self.solmut[j]) - 1:
                         if self.kartta[j-1][i] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j-1][i], 5))
+                                Kaari(self.solmut[j-1][i], 1))
                         if self.kartta[j+1][i] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j+1][i], 5))
+                                Kaari(self.solmut[j+1][i], 1))
                         if self.kartta[j][i-1] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j][i-1], 5))
+                                Kaari(self.solmut[j][i-1], 1))
                         if self.kartta[j][i+1] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j][i+1], 5))
+                                Kaari(self.solmut[j][i+1], 1))
                         if self.kartta[j+1][i+1] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j+1][i+1], 7))
+                                Kaari(self.solmut[j+1][i+1], sqrt(2)))
                         if self.kartta[j+1][i-1] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j+1][i-1], 7))
+                                Kaari(self.solmut[j+1][i-1], sqrt(2)))
                         if self.kartta[j-1][i+1] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j-1][i+1], 7))
+                                Kaari(self.solmut[j-1][i+1], sqrt(2)))
                         if self.kartta[j-1][i-1] != 3:
                             self.solmut[j][i].naapurit.append(
-                                Kaari(self.solmut[j-1][i-1], 7))
+                                Kaari(self.solmut[j-1][i-1], sqrt(2)))
                 if j == 0 and i > 0 and i < len(self.solmut[j]) - 1:
                     if self.kartta[j][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i+1], 5))
+                            Kaari(self.solmut[j][i+1], 1))
                     if self.kartta[j][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i-1], 5))
+                            Kaari(self.solmut[j][i-1], 1))
                     if self.kartta[j+1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i], 5))
+                            Kaari(self.solmut[j+1][i], 1))
                     if self.kartta[j+1][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i+1], 7))
+                            Kaari(self.solmut[j+1][i+1], sqrt(2)))
                     if self.kartta[j+1][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i-1], 7))
+                            Kaari(self.solmut[j+1][i-1], sqrt(2)))
                 if j == len(self.solmut) - 1 and i > 0 and i < len(self.solmut[j]) - 1:
                     if self.kartta[j][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i+1], 5))
+                            Kaari(self.solmut[j][i+1], 1))
                     if self.kartta[j][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i-1], 5))
+                            Kaari(self.solmut[j][i-1], 1))
                     if self.kartta[j-1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i], 5))
+                            Kaari(self.solmut[j-1][i], 1))
                     if self.kartta[j-1][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i+1], 7))
+                            Kaari(self.solmut[j-1][i+1], sqrt(2)))
                     if self.kartta[j-1][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i-1], 7))
+                            Kaari(self.solmut[j-1][i-1], sqrt(2)))
                 if i == 0 and j > 0 and j < len(self.solmut) - 1:
                     if self.kartta[j+1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i], 5))
+                            Kaari(self.solmut[j+1][i], 1))
                     if self.kartta[j-1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i], 5))
+                            Kaari(self.solmut[j-1][i], 1))
                     if self.kartta[j][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i+1], 5))
+                            Kaari(self.solmut[j][i+1], 1))
                     if self.kartta[j+1][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i+1], 7))
+                            Kaari(self.solmut[j+1][i+1], sqrt(2)))
                     if self.kartta[j-1][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i+1], 7))
+                            Kaari(self.solmut[j-1][i+1], sqrt(2)))
                 if i == len(self.solmut[j]) - 1 and j > 0 and j < len(self.solmut) - 1:
                     if self.kartta[j+1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i], 5))
+                            Kaari(self.solmut[j+1][i], 1))
                     if self.kartta[j-1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i], 5))
+                            Kaari(self.solmut[j-1][i], 1))
                     if self.kartta[j][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i-1], 5))
+                            Kaari(self.solmut[j][i-1], 1))
                     if self.kartta[j-1][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i-1], 7))
+                            Kaari(self.solmut[j-1][i-1], sqrt(2)))
                     if self.kartta[j+1][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i-1], 7))
+                            Kaari(self.solmut[j+1][i-1], sqrt(2)))
                 if j == 0 and i == 0:
                     if self.kartta[j+1][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i+1], 7))
+                            Kaari(self.solmut[j+1][i+1], sqrt(2)))
                     if self.kartta[j][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i+1], 5))
+                            Kaari(self.solmut[j][i+1], 1))
                     if self.kartta[j+1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i], 5))
+                            Kaari(self.solmut[j+1][i], 1))
                 if j == 0 and i == len(self.solmut[j]) - 1:
                     if self.kartta[j+1][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i-1], 7))
+                            Kaari(self.solmut[j+1][i-1], sqrt(2)))
                     if self.kartta[j+1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j+1][i], 5))
+                            Kaari(self.solmut[j+1][i], 1))
                     if self.kartta[j][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i-1], 5))
+                            Kaari(self.solmut[j][i-1], 1))
                 if j == len(self.solmut) - 1 and i == 0:
                     if self.kartta[j-1][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i+1], 7))
+                            Kaari(self.solmut[j-1][i+1], sqrt(2)))
                     if self.kartta[j-1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i], 5))
+                            Kaari(self.solmut[j-1][i], 1))
                     if self.kartta[j][i+1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i+1], 5))
+                            Kaari(self.solmut[j][i+1], 1))
                 if j == len(self.solmut) - 1 and i == len(self.solmut[j]) - 1:
                     if self.kartta[j-1][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i-1], 7))
+                            Kaari(self.solmut[j-1][i-1], sqrt(2)))
                     if self.kartta[j-1][i] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j-1][i], 5))
+                            Kaari(self.solmut[j-1][i], 1))
                     if self.kartta[j][i-1] != 3:
                         self.solmut[j][i].naapurit.append(
-                            Kaari(self.solmut[j][i-1], 5))
+                            Kaari(self.solmut[j][i-1], 1))
 
     def reitinhaku(self):
 
@@ -227,9 +228,9 @@ class Dijkstra:
         if self.loppusolmu.etaisyys == float("inf"):
             print("Polkua ei löytynyt.")
         else:
-            print(f"Polun pituus: {self.loppusolmu.etaisyys}")
-        print(f"Verkon luomiseen kulunut aika: {vloppu-valku} s")
-        print(f"Aikaa kului yhteensä: {loppu-alku} s.")
+            print(f"Polun pituus: {self.loppusolmu.etaisyys:.2f}")
+#        print(f"Verkon luomiseen kulunut aika: {vloppu-valku} s")
+        print(f"Aikaa kului: {loppu-alku} s.")
         print()
 
         if self.loppusolmu.etaisyys != float("inf"):

@@ -15,8 +15,8 @@ class Suorita:
         # Määritellään näytön koko, kello ja käytettävät värit.
 
         pygame.init()
-        self.leveys = len(kartta.taulukko[0])*10
-        self.korkeus = len(kartta.taulukko)*10
+        self.leveys = len(kartta.taulukko[0])*2
+        self.korkeus = len(kartta.taulukko)*2
         self.naytto = pygame.display.set_mode((self.leveys, self.korkeus))
         self.kello = pygame.time.Clock()
         self.musta = (0, 0, 0)
@@ -32,8 +32,8 @@ class Suorita:
 
         ruutu_x_pos = (self.leveys//len(kartta.taulukko[0]))
         ruutu_y_pos = (self.korkeus//len(kartta.taulukko))
-        ruutu_leveys = (self.leveys//len(kartta.taulukko[0])) - 2
-        ruutu_korkeus = (self.korkeus//len(kartta.taulukko)) - 2
+        ruutu_leveys = (self.leveys//len(kartta.taulukko[0]))
+        ruutu_korkeus = (self.korkeus//len(kartta.taulukko))
 
         self.naytto.fill(self.musta)
         for j in range(len(kartta.taulukko)):
