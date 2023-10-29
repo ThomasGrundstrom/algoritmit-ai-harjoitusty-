@@ -490,6 +490,16 @@ class Jps:
                 pos_y = solmu.koordinaatit[1]
                 self.kartta[pos_y][pos_x] = 4
 
+        print()
+        print("Jump Point Search: ")
+        if self.loppusolmu.etaisyys == float("inf"):
+            print("Polkua ei löytynyt.")
+        else:
+            print(f"Polun pituus: {self.loppusolmu.etaisyys:.2f}")
+#        print(f"Solmujen luomiseen kulunut aika: {loppu2-alku2} s")
+        print(f"Aikaa kului: {loppu-alku} s.")
+        print()
+
             # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
 #            for solmu in self.hyppypisteet:
 #                if solmu.koordinaatit != self.loppusolmu.koordinaatit:
@@ -506,12 +516,3 @@ class Jps:
 #                    if self.solmut[j][i].tutkittu:
 #                        self.kartta[pos_y][pos_x] = 5
 
-        print()
-        print("Jump Point Search: ")
-        if self.loppusolmu.etaisyys == float("inf"):
-            print("Polkua ei löytynyt.")
-        else:
-            print(f"Polun pituus: {self.loppusolmu.etaisyys:.2f}")
-#        print(f"Solmujen luomiseen kulunut aika: {loppu2-alku2} s")
-        print(f"Aikaa kului: {loppu-alku} s.")
-        print()

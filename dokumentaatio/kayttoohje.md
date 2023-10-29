@@ -32,16 +32,16 @@ Tiedostossa voi luoda vapaavalintaisen kokoisen kartan muodostamalla kaksiulotte
 ## Reitinhaku kartalla
 
 **Huom! Polkujen laskettu pituus muodostuu seuraavasti:**
-- Kun siirrytään ruudusta toiseen joko vertikaalisesti tai horisontaalisesti, polun pituuteen lisätään 5.
-- Kun siirrytään ruudusta toiseen diagonaalisesti, polun pituuteen lisätään 7.
+- Kun siirrytään ruudusta toiseen joko vertikaalisesti tai horisontaalisesti, polun pituuteen lisätään 1.
+- Kun siirrytään ruudusta toiseen diagonaalisesti, polun pituuteen lisätään sqrt(2).
 
 Reitinhaun lähtöruudusta maaliruutuun voi toteuttaa kahdella eri algoritmilla: 
 
-1. Dijkstran algoritmi: Paina näppäimistöllä d-näppäintä. Kartalle piirtyy sinisistä ruuduista muodostuva optimaalisen pituinen reitti alku- ja maaliruutujen välille. Komentoriville tulostuu tieto siitä, kuinka kauan reitinhaku kesti ja kuinka pitkä muodostettu polku on. 
+1. Dijkstran algoritmi: Paina näppäimistöllä d-näppäintä. Kartalle piirtyy sinisistä ruuduista muodostuva optimaalisen pituinen reitti alku- ja maaliruutujen välille. Komentoriville tulostuu tieto siitä, kuinka kauan reitinhaku kesti ja kuinka pitkä muodostettu polku on. Jos tahdot nähdä kaikki haun aikana käsitellyt solmut, koodi tätä varten löytyy dijkstra.py-tiedoston pohjalta. Koodin saa käyttöön poistamalla rivien eteen asetetut #-merkit.
 
 	- Algoritmilla muodostetun polun voi pyyhkiä kartalta painamalla näppäimistön c-näppäintä.
 
-2. Jump Point Search: Paina näppäimistöllä j-näppäintä. Kartalle piirtyy sinisistä ruuduista muodostuva optimaalisen mittainen polku lähtö- ja maaliruutujen välille. Komentoriville tulostuu tieto siitä, kuinka kauan reitinhaku kesti ja kuinka pitkä löydetty polku on.
+2. Jump Point Search: Paina näppäimistöllä j-näppäintä. Kartalle piirtyy sinisistä ruuduista muodostuva optimaalisen mittainen polku lähtö- ja maaliruutujen välille. Komentoriville tulostuu tieto siitä, kuinka kauan reitinhaku kesti ja kuinka pitkä löydetty polku on. Jos haluat nähdä löydetyt hyppypisteet tai kaikki tutkitut ruudut kartalla, koodi tähän löytyy jps.py-tiedoston pohjalta. Koodin saa käyttöön poistamalla sen eteen asetetut #-merkit.
 
 
 ## Testit
