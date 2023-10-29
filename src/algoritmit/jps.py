@@ -3,13 +3,16 @@ from math import sqrt
 from kartta.kartta import kartta
 from komponentit.jpssolmut import Jpssolmu
 
+
 class Priorityqueue:
+
+    # Luokka, jolla saadaan JPS tutkimaan oletetusti lyhyemmän polun muodostavat hyppypisteet ensin.
+
     def __init__(self, loppusolmu):
         self.jono = {}
-        self.lista = []
         self.loppu_x = loppusolmu.koordinaatit[0]
         self.loppu_y = loppusolmu.koordinaatit[1]
-    
+
     def lisaa_jonoon(self, solmu):
         pos_x = solmu.koordinaatit[0]
         pos_y = solmu.koordinaatit[1]
@@ -40,12 +43,12 @@ class Priorityqueue:
                 if pos_y > self.loppu_y:
                     pos_y -= 1
         self.jono[solmu] = oletus + solmu.etaisyys
-    
+
     def poista_lahin(self):
         lahin = min(self.jono, key=lambda solmu: self.jono[solmu])
         del self.jono[lahin]
         return lahin
-    
+
     def pituus(self):
         return len(self.jono)
 
@@ -360,7 +363,7 @@ class Jps:
             return None
         if seuraava.tyyppi == 3:
             return None
-        
+
 #        if suunta in [1, 3, 5, 7]:
 #            uusi = solmu.etaisyys + sqrt(2)
 #        if suunta in [0, 2, 4, 6]:
@@ -500,7 +503,7 @@ class Jps:
         print(f"Aikaa kului: {loppu-alku} s.")
         print()
 
-            # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
+        # Alla olevalla koodilla saa piirrettyä löydetyt hyppypisteet kartalle.
 #            for solmu in self.hyppypisteet:
 #                if solmu.koordinaatit != self.loppusolmu.koordinaatit:
 #                    pos_x = solmu.koordinaatit[0]
@@ -515,4 +518,3 @@ class Jps:
 #                if self.solmut[j][i].koordinaatit != self.loppusolmu.koordinaatit:
 #                    if self.solmut[j][i].tutkittu:
 #                        self.kartta[pos_y][pos_x] = 5
-
