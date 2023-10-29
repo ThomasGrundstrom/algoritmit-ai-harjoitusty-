@@ -192,9 +192,8 @@ class Dijkstra:
         alku = time.time()
 
         # Luodaan ensin verkko algoritmia varten.
-        valku = time.time()
+
         self.luo_verkko()
-        vloppu = time.time()
 
         # Varsinainen Dijkstran algoritmi.
 
@@ -229,7 +228,6 @@ class Dijkstra:
             print("Polkua ei löytynyt.")
         else:
             print(f"Polun pituus: {self.loppusolmu.etaisyys:.2f}")
-#        print(f"Verkon luomiseen kulunut aika: {vloppu-valku} s")
         print(f"Aikaa kului: {loppu-alku} s.")
         print()
 

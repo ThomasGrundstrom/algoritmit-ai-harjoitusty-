@@ -364,20 +364,6 @@ class Jps:
         if seuraava.tyyppi == 3:
             return None
 
-#        if suunta in [1, 3, 5, 7]:
-#            uusi = solmu.etaisyys + sqrt(2)
-#        if suunta in [0, 2, 4, 6]:
-#            uusi = solmu.etaisyys + 1
-#        if uusi > seuraava.etaisyys:
-#            return None
-#        seuraava.edellinen = solmu
-#        seuraava.etaisyys = uusi
-#        self.karsi_naapurit(seuraava)
-#        if seuraava.tyyppi == 2:
-#            return seuraava
-#        if len(seuraava.pakolliset) != 0:
-#            return seuraava
-
         if seuraava.tyyppi == 1:
             return None
         if seuraava.hyppypiste:
@@ -455,18 +441,7 @@ class Jps:
 
         alku = time.time()
 
-        alku2 = time.time()
         self.luo_solmut()
-        loppu2 = time.time()
-
-#        stack = self.tunnista_seuraavat(self.alkusolmu)
-#        while True:
-#            if len(stack) == 0:
-#                break
-#            solmu = stack.pop(0)
-#            for i in self.tunnista_seuraavat(solmu):
-#                stack.append(i)
-#            self.tutkitut.append(solmu)
 
         stack = Priorityqueue(self.loppusolmu)
         for solmu in self.tunnista_seuraavat(self.alkusolmu):
@@ -499,7 +474,6 @@ class Jps:
             print("Polkua ei löytynyt.")
         else:
             print(f"Polun pituus: {self.loppusolmu.etaisyys:.2f}")
-#        print(f"Solmujen luomiseen kulunut aika: {loppu2-alku2} s")
         print(f"Aikaa kului: {loppu-alku} s.")
         print()
 
