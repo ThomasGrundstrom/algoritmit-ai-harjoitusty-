@@ -1,5 +1,8 @@
 # algoritmit-ai-harjoitustyo
 
+Helsingin Yliopiston Algoritmit ja tekoäly-kurssia varten tehty harjoitustyö. Projektin kehitys ja testaus on tehty fuksiläppärillä.
+
+
 ## Dokumentaatio
 
 - [Määrittelydokumentti](https://github.com/ThomasGrundstrom/algoritmit-ai-harjoitustyo/blob/main/dokumentaatio/maarittelydokumentti.md)
