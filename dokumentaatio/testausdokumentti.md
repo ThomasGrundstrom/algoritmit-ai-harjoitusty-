@@ -8,6 +8,8 @@ Dijkstran algoritmi on testattu kartoilla, joissa kuljetaan kahdeksaan suuntaan 
 3. Laske pisteiden etäisyys käyttäen Jump Point Search:ia.
 4. Vertaa saatuja etäisyyksiä toisiinsa.
 
+Reitinhaun jälkeen algoritmit tulostavat komentoriville löytyneiden reittien pituudet sekä reittien löytämiseen kuluneet ajat. Tulostuneista aikatiedoista näkyy, että useimmissa tapauksissa JPS löytää optimaalisen reitin nopeammin kuin Dijkstran algoritmi. Tämä johtuu siitä, että Dijkstran algoritmissa reitinhaku kulkee jokaiseen suuntaan lähtösolmusta ja keskimäärin yhden ruudun käsittelyyn menee kauemmin kuin JPS:llä. Toisin kuin Dijkstran algoritmi, JPS etsii "hyppypisteitä", eli pisteitä, joiden läpi optimaalinen polku voisi mahdollisesti kulkea, ja laajentaa hakua vain niiden kohdalta. Lisäksi JPS ei kulje kaikkiin mahdollisiin suuntiin, vaan priorisoi reitinhakua maalipistettä kohti.
+
 
 ## Testikattavuus
 
